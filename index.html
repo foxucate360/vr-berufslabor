@@ -1,11 +1,13 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR BERUFSLABOR | ATELIER 06 · VR HANDS</title><style>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR BERUFSLABOR | ATELIER 07 · WEBXR HANDS</title><style>
 *{box-sizing:border-box}body{margin:0;overflow:hidden;background:#10191f;color:#ecf0f2;font:14px system-ui,Arial}#ui{position:fixed;z-index:10;top:16px;left:16px;pointer-events:none;max-width:410px}#panel{padding:16px 20px;background:#10202bdc;border:1px solid #ffffff38;border-radius:14px;backdrop-filter:blur(12px)}h1{font-size:19px;margin:0 0 6px;letter-spacing:.09em}p{margin:8px 0;line-height:1.5;color:#cbd7df}#task{color:#f9d68a;font-weight:700}#feedback{color:#a9e6b8}#guide{position:fixed;left:16px;bottom:18px;z-index:9;background:#10202be5;border-radius:10px;padding:13px 17px;max-width:510px;font-size:12px;line-height:1.65}#vr{position:fixed;bottom:18px;right:18px;z-index:20;pointer-events:auto}button{background:#ffd277;color:#17202b;border:0;border-radius:9px;padding:12px 19px;font-weight:800;cursor:pointer}button:disabled{opacity:.45}#msg{position:fixed;top:16px;right:16px;max-width:270px;z-index:11;font-size:12px;color:#ffe0b4;background:#1d2935dd;padding:12px;border-radius:10px}#splash{position:fixed;inset:0;z-index:13;background:#0c1925e9;display:flex;align-items:center;justify-content:center;padding:25px}#splash>div{background:#182d3b;border:1px solid #ffffff35;padding:28px;border-radius:20px;max-width:520px}#splash h2{font-size:24px;margin:0 0 8px}#splash button{margin-top:10px}#reticle{position:fixed;left:50%;top:50%;width:7px;height:7px;background:white;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}body.in-vr #ui,body.in-vr #guide,body.in-vr #reticle,body.in-vr #splash,body.in-vr #msg,body.in-vr #cartControl{display:none}@media(max-width:650px){#panel{padding:10px}h1{font-size:14px}#guide{font-size:11px;max-width:75%}}
-</style></head><body><div id="ui"><div id="panel"><h1>ATELIER 06 / HANDSTEUERUNG</h1><p>Quest 3 / 3S · GLB-Werkzeugwagen · VR-Trainingshalle</p><p id="task">Aufgabe: Greife den orange markierten Schraubenschlüssel.</p><p id="feedback">Lernfortschritt: 0 / 3</p></div></div><div id="msg">3D-Engine lädt …</div><div id="guide"><b>Quest:</b> linker Stick = laufen · rechter Stick = 30° drehen · Grip = Hände schließen/Werkzeug greifen · rechter Trigger = teleportieren.<br><b>Desktop:</b> Klicken zum Starten · WASD laufen · Maus umsehen · Linksklick Objekt aufnehmen/ablegen · T teleportieren · Q/E drehen · ESC Maus frei</div><div id="reticle"></div><div id="splash"><div><h2>Willkommen im VR-Berufslabor</h2><p>Eine ganze begehbare 3D-Werkstatt mit einem separat geladenen GLB-Werkzeugwagen, Fahrzeug und zwei greifbaren Werkzeugen. Dies ist ein VR-Prototyp, keine fotorealistische Trainingssimulation.</p><p>Für die Quest im Browser eine <b>HTTPS-Adresse</b> öffnen und anschließend <b>VR starten</b> wählen. Auf dem Desktop kannst du den Ablauf vorher testen.</p><button id="enter">Desktop-Demo starten</button><p style="font-size:12px">Für VR: Desktop-Demo starten antippen, dann den ENTER-VR-Button unten rechts wählen.</p></div></div><div id="vr"></div>
+</style></head><body><div id="ui"><div id="panel"><h1>ATELIER 07 / META HANDTRACKING</h1><p>Quest 3 / 3S · GLB-Werkzeugwagen · VR-Trainingshalle</p><p id="task">Aufgabe: Greife den orange markierten Schraubenschlüssel.</p><p id="feedback">Lernfortschritt: 0 / 3</p></div></div><div id="msg">3D-Engine lädt …</div><div id="guide"><b>Quest:</b> linker Stick = laufen · rechter Stick = 30° drehen · Grip = Werkzeug greifen · Ohne Controller: echte Handmodelle und Pinch · rechter Trigger = teleportieren.<br><b>Desktop:</b> Klicken zum Starten · WASD laufen · Maus umsehen · Linksklick Objekt aufnehmen/ablegen · T teleportieren · Q/E drehen · ESC Maus frei</div><div id="reticle"></div><div id="splash"><div><h2>Willkommen im VR-Berufslabor</h2><p>Eine ganze begehbare 3D-Werkstatt mit einem separat geladenen GLB-Werkzeugwagen, Fahrzeug und zwei greifbaren Werkzeugen. Dies ist ein VR-Prototyp, keine fotorealistische Trainingssimulation.</p><p>Für die Quest im Browser eine <b>HTTPS-Adresse</b> öffnen und anschließend <b>VR starten</b> wählen. Auf dem Desktop kannst du den Ablauf vorher testen.</p><button id="enter">Desktop-Demo starten</button><p style="font-size:12px">Für VR: Desktop-Demo starten antippen, dann den ENTER-VR-Button unten rechts wählen.</p></div></div><div id="vr"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script><script type="module">
 import * as THREE from 'three';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
+import {XRHandModelFactory} from 'three/addons/webxr/XRHandModelFactory.js';
+import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 const scene=new THREE.Scene();scene.background=new THREE.Color('#202a33');scene.fog=new THREE.Fog('#202a33',25,52);
 const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.05,85);camera.position.set(0,1.65,0);
 const rig=new THREE.Group();rig.position.set(0,0,7);scene.add(rig);rig.add(camera);
@@ -104,42 +106,35 @@ function refresh(){let n=completed.size;feedback.textContent=`Erledigt: ${n} / 2
 function worldPosition(o){return o.getWorldPosition(new THREE.Vector3())}function nearestTool(pos,maxDist=.42){let best=null,dist=maxDist;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;let d=worldPosition(o).distanceTo(pos);if(d<dist){best=o;dist=d}}return best}
 function take(o,parent,index){if(!o)return false;o.userData.heldBy=index;parent.attach(o);o.position.set(0,-.015,-.13);o.rotation.set(0,0,0);pickCount++;refresh();notice('Aufgenommen: '+o.userData.name);return true}
 function release(o){if(!o)return;scene.attach(o);o.userData.heldBy=null;let slot=o.userData.kind==='wrench'?sockets[0]:sockets[1];let dist=worldPosition(o).distanceTo(worldPosition(slot));if(dist<.56){o.userData.snapped=true;slot.attach(o);o.position.set(0,.13,0);o.rotation.set(0,0,0);completed.add(o.userData.kind);notice('Richtig abgelegt: '+o.userData.name);refresh()}else{const p=o.position;o.position.y=Math.max(1.10,p.y);if(p.y>1.6||p.x<-4||p.x>8||p.z<-8||p.z>7){o.position.copy(o.userData.home)}else{o.position.y=1.17}notice('Werkzeug abgelegt. Bringe es zur markierten Ablage.')}}
-// XR grip, not merely a ray click. Squeeze holds until released.
-// Hands are lightweight articulated 3D glove meshes, not photorealistic hand scans.
-// Grip animation also works when no tool is in reach.
-const controllers=[],grips=[],held=[null,null],hands=[],gripValues=[0,0],gripTargets=[0,0];let turnLatch=[false,false],teleTarget=null;
-function makeHand(side){
- const hand=new THREE.Group();hand.rotation.x=-.22;
- const glove=new THREE.MeshStandardMaterial({color:side===0?0x344753:0x394954,roughness:.87,metalness:.02});
- const cuff=new THREE.MeshStandardMaterial({color:0xe2a34c,roughness:.7});
- const seams=new THREE.MeshStandardMaterial({color:0x172a35,roughness:.85});
- const palm=new THREE.Mesh(new THREE.BoxGeometry(.105,.037,.132),glove);palm.position.set(0,0,-.065);hand.add(palm);
- const sleeve=new THREE.Mesh(new THREE.CylinderGeometry(.058,.064,.115,12),cuff);sleeve.rotation.x=Math.PI/2;sleeve.position.set(0,0,.065);hand.add(sleeve);
- const fingers=[];
- for(let j=0;j<4;j++){
-   const base=new THREE.Group();base.position.set((j-1.5)*.027,0,-.124);hand.add(base);
-   const len=[.072,.082,.079,.065][j];
-   const section=new THREE.Mesh(new THREE.CapsuleGeometry(.0125,Math.max(.015,len-.025),4,7),glove);
-   section.rotation.x=Math.PI/2;section.position.z=-len*.5;base.add(section);
-   const tip=new THREE.Mesh(new THREE.SphereGeometry(.0125,8,6),seams);tip.position.z=-len;base.add(tip);
-   fingers.push(base);
- }
- const thumb=new THREE.Group();thumb.position.set((side===0?-.069:.069),-.007,-.058);thumb.rotation.y=(side===0?-.7:.7);hand.add(thumb);
- const digit=new THREE.Mesh(new THREE.CapsuleGeometry(.016,.035,4,7),glove);digit.rotation.x=Math.PI/2;digit.position.z=-.035;thumb.add(digit);
- const knuckles=new THREE.Mesh(new THREE.BoxGeometry(.102,.008,.023),seams);knuckles.position.set(0,.024,-.126);hand.add(knuckles);
- hand.position.set(0,-.03,-.025);
- return {group:hand,fingers,thumb};
-}
-function animateHands(dt){for(let i=0;i<2;i++){
- gripValues[i]=THREE.MathUtils.damp(gripValues[i],gripTargets[i],15,dt);
- const v=gripValues[i],h=hands[i];if(!h)continue;
- for(let j=0;j<4;j++)h.fingers[j].rotation.x=-v*1.08;
- h.thumb.rotation.x=v*.85;
-}}
-
-for(let i=0;i<2;i++){const ray=renderer.xr.getController(i);const grip=renderer.xr.getControllerGrip(i);rig.add(ray);rig.add(grip);controllers.push(ray);grips.push(grip);const h=makeHand(i);grip.add(h.group);hands.push(h);ray.userData.index=i;
-ray.addEventListener('squeezestart',()=>{gripTargets[i]=1;if(held[i])return;const obj=nearestTool(worldPosition(grip),.40);if(obj&&take(obj,grip,i))held[i]=obj});ray.addEventListener('squeezeend',()=>{gripTargets[i]=0;if(held[i]){release(held[i]);held[i]=null}});
-ray.addEventListener('selectstart',()=>{if(i===1){const target=projectTeleport(ray);if(target)teleport(target)}else if(!held[i]){const obj=nearestTool(worldPosition(grip),.35);if(obj&&take(obj,grip,i))held[i]=obj}});ray.addEventListener('selectend',()=>{if(i===0&&held[i]){release(held[i]);held[i]=null}});
+// Standard hand meshes contributed by Meta to WebXR Input Profiles.
+// With tracked Touch controllers, WebXR has controller poses and grip buttons,
+// not a fully tracked finger skeleton. Show profile-matched controller models
+// instead of inventing inaccurate hand poses.
+const controllers=[],grips=[],held=[null,null];let turnLatch=[false,false],teleTarget=null;
+const handFactory=new XRHandModelFactory();
+const controllerFactory=new XRControllerModelFactory();
+const trackedHands=[];
+for(let i=0;i<2;i++){
+  const ray=renderer.xr.getController(i);
+  const grip=renderer.xr.getControllerGrip(i);
+  rig.add(ray);rig.add(grip);controllers.push(ray);grips.push(grip);
+  grip.add(controllerFactory.createControllerModel(grip));
+  ray.userData.index=i;
+  ray.addEventListener('squeezestart',()=>{if(held[i])return;const obj=nearestTool(worldPosition(grip),.40);if(obj&&take(obj,grip,i))held[i]=obj});
+  ray.addEventListener('squeezeend',()=>{if(held[i]){release(held[i]);held[i]=null}});
+  ray.addEventListener('selectstart',()=>{if(i===1){const target=projectTeleport(ray);if(target)teleport(target)}else if(!held[i]){const obj=nearestTool(worldPosition(grip),.35);if(obj&&take(obj,grip,i))held[i]=obj}});
+  ray.addEventListener('selectend',()=>{if(i===0&&held[i]){release(held[i]);held[i]=null}});
+  const trackedHand=renderer.xr.getHand(i);
+  trackedHand.add(handFactory.createHandModel(trackedHand,'mesh'));
+  rig.add(trackedHand);trackedHands.push(trackedHand);
+  trackedHand.addEventListener('pinchstart',()=>{
+    if(held[i])return;
+    const wrist=trackedHand.joints && (trackedHand.joints['wrist'] || trackedHand.joints['index-finger-tip']);
+    if(!wrist)return;
+    const obj=nearestTool(worldPosition(wrist),.24);
+    if(obj&&take(obj,wrist,i))held[i]=obj;
+  });
+  trackedHand.addEventListener('pinchend',()=>{if(held[i]){release(held[i]);held[i]=null}});
 }
 // Teleport to walkable floors; distance limited and central station excluded.
 const floorY=0;function validFloor(p){return p.x>-8.1&&p.x<8.1&&p.z>-8.55&&p.z<8.5&&!(p.x>-3.7&&p.x<1.5&&p.z>-3.7&&p.z<-1.35)&&!(p.x>3.55&&p.x<7.25&&p.z>-3.7&&p.z<-1.25)&&!(p.x<-7.5&&p.z>1&&p.z<4.2)}
@@ -221,8 +216,8 @@ for(let i=0;i<2;i++){const ctrl=renderer.xr.getController(i);ctrl.addEventListen
 // Desktop test mode, similar task logic with pointer lock and camera-relative pickup.
 const keys={};let yaw=0,pitch=0,locked=false,desktopHeld=null;document.getElementById('enter').onclick=()=>{document.getElementById('splash').style.display='none';renderer.domElement.requestPointerLock?.()};document.addEventListener('pointerlockchange',()=>locked=document.pointerLockElement===renderer.domElement);document.addEventListener('mousemove',e=>{if(locked&&!renderer.xr.isPresenting){yaw-=e.movementX*.0022;pitch=THREE.MathUtils.clamp(pitch-e.movementY*.0022,-1.4,1.4)}});document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='KeyQ')snapTurn(1);if(e.code==='KeyE')snapTurn(-1);if(e.code==='KeyT'&&!renderer.xr.isPresenting){const dest=projectTeleport(camera);if(dest)teleport(dest)}});document.addEventListener('keyup',e=>keys[e.code]=false);
 renderer.domElement.addEventListener('click',()=>{if(renderer.xr.isPresenting)return;if(!locked){renderer.domElement.requestPointerLock?.();return}if(desktopHeld){release(desktopHeld);desktopHeld=null;return}const center=camera.getWorldPosition(new THREE.Vector3());const forward=new THREE.Vector3(0,0,-1).applyQuaternion(camera.getWorldQuaternion(new THREE.Quaternion()));let candidate=null,best=2.4;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;const delta=worldPosition(o).sub(center);const depth=delta.dot(forward);const deviation=delta.clone().addScaledVector(forward,-depth).length();if(depth>0&&depth<2.5&&deviation<.42&&depth<best){candidate=o;best=depth}}if(candidate){take(candidate,camera,'desktop');candidate.position.set(.23,-.22,-.64);desktopHeld=candidate}});
-let last=performance.now();renderer.setAnimationLoop(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.06);last=now;if(!renderer.xr.isPresenting){camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);const f=Number(!!keys.KeyW)-Number(!!keys.KeyS),r=Number(!!keys.KeyD)-Number(!!keys.KeyA);const dir=new THREE.Vector3(-Math.sin(yaw)*f+Math.cos(yaw)*r,0,-Math.cos(yaw)*f-Math.sin(yaw)*r);if(dir.lengthSq()){dir.normalize().multiplyScalar(dt*(keys.ShiftLeft?4:2.1));const next=rig.position.clone().add(dir);if(validFloor(next))rig.position.copy(next)}}else{updateSticks(dt);updateTeleportVisual()}animateHands(dt);cartTick(dt);renderer.render(scene,camera)});
-const btn=VRButton.createButton(renderer);document.getElementById('vr').appendChild(btn);btn.style.position='static';btn.style.margin='0';
+let last=performance.now();renderer.setAnimationLoop(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.06);last=now;if(!renderer.xr.isPresenting){camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);const f=Number(!!keys.KeyW)-Number(!!keys.KeyS),r=Number(!!keys.KeyD)-Number(!!keys.KeyA);const dir=new THREE.Vector3(-Math.sin(yaw)*f+Math.cos(yaw)*r,0,-Math.cos(yaw)*f-Math.sin(yaw)*r);if(dir.lengthSq()){dir.normalize().multiplyScalar(dt*(keys.ShiftLeft?4:2.1));const next=rig.position.clone().add(dir);if(validFloor(next))rig.position.copy(next)}}else{updateSticks(dt);updateTeleportVisual()}cartTick(dt);renderer.render(scene,camera)});
+const btn=VRButton.createButton(renderer, { optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking'] });document.getElementById('vr').appendChild(btn);btn.style.position='static';btn.style.margin='0';
 if(!window.isSecureContext){msg.textContent='Hinweis: Quest VR benötigt HTTPS (oder localhost).'}else if(!navigator.xr){msg.textContent='WebXR nicht vorhanden. Desktop-Demo ist nutzbar.'}else navigator.xr.isSessionSupported('immersive-vr').then(ok=>notice(ok?'WebXR verfügbar · Quest-VR starten':'Immersive VR hier nicht unterstützt. Desktop-Test möglich.')).catch(()=>{});
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
 </script></body></html>
