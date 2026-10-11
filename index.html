@@ -1,6 +1,6 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR BERUFSLABOR | ATELIER 10 · SCHRAUBTRAINING</title><style>
-*{box-sizing:border-box}body{margin:0;overflow:hidden;background:#10191f;color:#ecf0f2;font:14px system-ui,Arial}#ui{position:fixed;z-index:10;top:16px;left:16px;pointer-events:none;max-width:410px}#panel{padding:16px 20px;background:#10202bdc;border:1px solid #ffffff38;border-radius:14px;backdrop-filter:blur(12px)}h1{font-size:19px;margin:0 0 6px;letter-spacing:.09em}p{margin:8px 0;line-height:1.5;color:#cbd7df}#task{color:#f9d68a;font-weight:700}#feedback{color:#a9e6b8}#guide{position:fixed;left:16px;bottom:18px;z-index:9;background:#10202be5;border-radius:10px;padding:13px 17px;max-width:510px;font-size:12px;line-height:1.65}#vr{position:fixed;bottom:18px;right:18px;z-index:20;pointer-events:auto}button{background:#ffd277;color:#17202b;border:0;border-radius:9px;padding:12px 19px;font-weight:800;cursor:pointer}button:disabled{opacity:.45}#msg{position:fixed;top:16px;right:16px;max-width:270px;z-index:11;font-size:12px;color:#ffe0b4;background:#1d2935dd;padding:12px;border-radius:10px}#splash{position:fixed;inset:0;z-index:13;background:#0c1925e9;display:flex;align-items:center;justify-content:center;padding:25px}#splash>div{background:#182d3b;border:1px solid #ffffff35;padding:28px;border-radius:20px;max-width:520px}#splash h2{font-size:24px;margin:0 0 8px}#splash button{margin-top:10px}#reticle{position:fixed;left:50%;top:50%;width:7px;height:7px;background:white;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}body.in-vr #ui,body.in-vr #guide,body.in-vr #reticle,body.in-vr #splash,body.in-vr #msg,body.in-vr #cartControl{display:none}@media(max-width:650px){#panel{padding:10px}h1{font-size:14px}#guide{font-size:11px;max-width:75%}}
-</style></head><body><div id="ui"><div id="panel"><h1>ATELIER 14 / WERKZEUG-FIX</h1><p>Quest 3 / 3S · echterer Radwechsel · Reifen greifen · Reifen montieren</p><p id="task">Aufgabe: Reifen vom Ständer aufnehmen, am Sportwagen montieren und danach mit dem Akkuschrauber festschrauben.</p><p id="feedback">Schraubfortschritt: 0 %</p></div></div><div id="msg">3D-Engine lädt …</div><div id="guide"><b>Quest:</b> linker Stick = laufen · rechter Stick = 30° drehen · Grip = Werkzeug oder Reifen greifen · Ohne Controller: echte Handmodelle und Faustgriff · rechter Trigger = schrauben/bohren, wenn Schrauber gehalten wird; sonst teleportieren.<br><b>Desktop:</b> Klicken zum Starten · WASD laufen · Maus umsehen · Linksklick Objekt aufnehmen/ablegen · B bohren (halten) · R Schraube zurücksetzen · T teleportieren · 3D-Pult: Reset/Zentrieren · Q/E drehen · ESC Maus frei</div><div id="reticle"></div><div id="splash"><div><h2>Willkommen im VR-Berufslabor</h2><p>Eine begehbare Werkstatt mit drei TRELLIS-GLB-Werkzeugen, GLB-Werkzeugwagen, Fahrzeug, Werkzeug-Greifankern und einer funktionalen Schraubstation. Dies ist eine weiter verbesserte VR-Werkstatt mit korrigierten Werkzeuggriffen, Reset-/Zentrierhilfe und einer ersten Reifenmontage-Station.</p><p>Für die Quest im Browser eine <b>HTTPS-Adresse</b> öffnen und anschließend <b>VR starten</b> wählen. Auf dem Desktop kannst du den Ablauf vorher testen.</p><button id="enter">Desktop-Demo starten</button><p style="font-size:12px">Für VR: Desktop-Demo starten antippen, dann den ENTER-VR-Button unten rechts wählen.</p></div></div><div id="vr"></div>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR BERUFSLABOR | ATELIER 19 · MULTIBERUFE & ELEKTRO</title><style>
+*{box-sizing:border-box}body{margin:0;overflow:hidden;background:#10191f;color:#ecf0f2;font:14px system-ui,Arial}#ui{position:fixed;z-index:10;top:16px;left:16px;pointer-events:auto;max-width:420px}#panel{padding:16px 20px;background:#10202bdc;border:1px solid #ffffff38;border-radius:14px;backdrop-filter:blur(12px)}h1{font-size:19px;margin:0 0 6px;letter-spacing:.09em}p{margin:8px 0;line-height:1.5;color:#cbd7df}#task{color:#f9d68a;font-weight:700}#feedback{color:#a9e6b8}#guide{position:fixed;left:16px;bottom:18px;z-index:9;background:#10202be5;border-radius:10px;padding:13px 17px;max-width:510px;font-size:12px;line-height:1.65}#vr{position:fixed;bottom:18px;right:18px;z-index:20;pointer-events:auto}button{background:#ffd277;color:#17202b;border:0;border-radius:9px;padding:12px 19px;font-weight:800;cursor:pointer}button:disabled{opacity:.45}#msg{position:fixed;top:16px;right:16px;max-width:270px;z-index:11;font-size:12px;color:#ffe0b4;background:#1d2935dd;padding:12px;border-radius:10px}#splash{position:fixed;inset:0;z-index:13;background:#0c1925e9;display:flex;align-items:center;justify-content:center;padding:25px}#splash>div{background:#182d3b;border:1px solid #ffffff35;padding:28px;border-radius:20px;max-width:520px}#splash h2{font-size:24px;margin:0 0 8px}#splash button{margin-top:10px}#reticle{position:fixed;left:50%;top:50%;width:7px;height:7px;background:white;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}body.in-vr #ui,body.in-vr #guide,body.in-vr #reticle,body.in-vr #splash,body.in-vr #msg,body.in-vr #cartControl{display:none}#dashboard{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}#dashboard button{padding:10px 13px;font-size:12px}#dashboard button.secondary{background:#35586e;color:#eef4f7}#dashboard button.kfz{background:#c67434;color:#fff}#dashboard button.elektro{background:#4d9f70;color:#fff}@media(max-width:650px){#panel{padding:10px}h1{font-size:14px}#guide{font-size:11px;max-width:75%}#dashboard button{padding:8px 10px;font-size:11px}}
+</style></head><body><div id="ui"><div id="panel"><h1>ATELIER 19 / MULTIBERUFE</h1><p>Quest 3 / 3S · gemeinsames Dashboard · Kfz + Elektro · erste Verdrahtungsübung</p><p id="task">Aufgabe: Wähle am Dashboard einen Berufsbereich. Neu: Elektro mit Schaltschrank, Lampe und Schalter.</p><p id="feedback">Bereit: Dashboard aktiv</p><div id="dashboard"><button id="goStart" class="secondary">Dashboard</button><button id="goKfz" class="kfz">Kfz-Bucht</button><button id="goElektro" class="elektro">Elektro-Station</button></div></div></div><div id="msg">Werkstatt wird geladen …</div><div id="guide"><b>Quest:</b> linker Stick = laufen · rechter Stick = 30° drehen · Grip = Werkzeug oder Reifen greifen · Ohne Controller: echte Handmodelle und Faustgriff · rechter Trigger = schrauben/bohren, sonst teleportieren · Dashboard in der Halle: Kfz / Elektro · 3D-Pult: Tor/Licht/Reset<br><b>Desktop:</b> Klicken zum Starten · WASD laufen · Maus umsehen · Linksklick Objekt aufnehmen/ablegen oder Kontakte wählen · B bohren (halten) · R Schraube zurücksetzen · T teleportieren · Q/E drehen · 1=Dashboard · 2=Kfz · 3=Elektro</div><div id="reticle"></div><div id="splash"><div><h2>Willkommen im VR-Berufslabor</h2><p>Eine gemeinsame VR-Halle mit mehreren Berufsbereichen. Neu hinzugekommen ist eine Elektro-Station mit Schaltschranktraining: Verdrahte Lampe und Schalter korrekt und erweitere später zum Gesellenstück.</p><p>Für die Quest im Browser eine <b>HTTPS-Adresse</b> öffnen und anschließend <b>VR starten</b> wählen. Auf dem Desktop kannst du den Ablauf vorher testen.</p><button id="enter">Desktop-Demo starten</button><p style="font-size:12px">Für VR: Desktop-Demo starten antippen, dann den ENTER-VR-Button unten rechts wählen.</p></div></div><div id="vr"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script><script type="module">
 import * as THREE from 'three';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
@@ -11,6 +11,8 @@ import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFact
 const scene=new THREE.Scene();scene.background=new THREE.Color('#25323a');scene.fog=new THREE.Fog('#25323a',24,54);
 const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.05,85);camera.position.set(0,1.65,0);
 const rig=new THREE.Group();rig.position.set(0,0,7);scene.add(rig);rig.add(camera);
+const zoneTargets={dashboard:new THREE.Vector3(0,0,7),kfz:new THREE.Vector3(-4.8,0,3.2),elektro:new THREE.Vector3(5.35,0,5.95)};
+let activeTrade='dashboard';
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.4));renderer.setSize(innerWidth,innerHeight);renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local-floor');renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.28;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;document.body.prepend(renderer.domElement);
 const m=(color,roughness=.7,metalness=.05)=>new THREE.MeshStandardMaterial({color,roughness,metalness});const concrete=m('#8e9697',.96),wall=m('#80888d',.84),steel=m('#8797a4',.34,.8),dark=m('#2b343d',.53,.58),black=m('#171d23',.85),wood=m('#967455',.77),orange=m('#f1a63b',.43,.4),red=m('#a64636',.43,.45),green=m('#51c08c',.45,.2),light=m('#f6eee0',.48),glass=new THREE.MeshStandardMaterial({color:'#bed9e6',metalness:.25,roughness:.16,transparent:true,opacity:.52});
 function add(geo,mat,x=0,y=0,z=0,parent=scene){const o=new THREE.Mesh(geo,mat);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o}function box(w,h,d,ma,x,y,z,p=scene){return add(new THREE.BoxGeometry(w,h,d),ma,x,y,z,p)}function cyl(r,h,ma,x,y,z,p=scene){return add(new THREE.CylinderGeometry(r,r,h,14),ma,x,y,z,p)}
@@ -42,11 +44,33 @@ function beam(a,b,r,ma,parent=scene){const av=new THREE.Vector3(...a),bv=new THR
 function textSign(str,x,y,z,w=3){const c=document.createElement('canvas');c.width=1024;c.height=256;const ctx=c.getContext('2d');ctx.fillStyle='#182a34';ctx.fillRect(0,0,1024,256);ctx.fillStyle='#f7e6bf';ctx.font='bold 79px Arial';ctx.textAlign='center';ctx.fillText(str,512,154);const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;const o=add(new THREE.PlaneGeometry(w,w/4),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);o.castShadow=false;return o}
 // Workshop with readable scale, modest geometry for standalone headsets.
 box(18,.3,19,concrete,0,-.17,0);box(18,5,.2,wall,0,2.5,-9.5);box(.2,5,19,wall,-9,2.5,0);box(.2,5,19,wall,9,2.5,0);box(18,.25,19,dark,0,5.1,0);
-for(let x=-7;x<9;x+=4){box(.12,5,.14,steel,x,2.5,-9.37);box(1.5,.09,.45,light,x,4.8,0);const pl=new THREE.PointLight('#ffe5ce',8,8,2);pl.position.set(x,4.25,0);scene.add(pl)}scene.add(new THREE.HemisphereLight('#d6dfeb','#534941',1.48));const fill=new THREE.DirectionalLight('#cfdfff',0.9);fill.position.set(8,5,-6);scene.add(fill);const sun=new THREE.DirectionalLight('#ffebd6',2.45);sun.position.set(-4,8,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-12;sun.shadow.camera.right=12;sun.shadow.camera.top=12;sun.shadow.camera.bottom=-12;sun.shadow.bias=-.0002;scene.add(sun);
+for(let x=-7;x<9;x+=4){box(.12,5,.14,steel,x,2.5,-9.37);box(1.5,.09,.45,light,x,4.8,0);const pl=new THREE.PointLight('#ffe5ce',8,8,2);pl.position.set(x,4.25,0);scene.add(pl);hallLights.push(pl)}scene.add(new THREE.HemisphereLight('#d6dfeb','#534941',1.48));const fill=new THREE.DirectionalLight('#cfdfff',0.9);fill.position.set(8,5,-6);scene.add(fill);hallLights.push(fill);const sun=new THREE.DirectionalLight('#ffebd6',2.45);sun.position.set(-4,8,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-12;sun.shadow.camera.right=12;sun.shadow.camera.top=12;sun.shadow.camera.bottom=-12;sun.shadow.bias=-.0002;scene.add(sun);hallLights.push(sun);
 for(let x=-6.6;x<=6.6;x+=4.4){box(3.1,1.55,.06,glass,x,3.4,-9.36);box(.08,1.65,.13,steel,x,3.4,-9.22)}
 // Ölspuren und Gummimarken für eine glaubwürdigere Werkstattoptik.
 for(const [x,z,s] of [[-3.8,-1.1,.9],[-1.4,1.8,1.2],[2.6,.4,.8],[5.7,-1.6,1.0],[-5.9,3.6,.7]]){const stain=add(new THREE.CircleGeometry(.34*s,20),new THREE.MeshStandardMaterial({color:'#1f2326',roughness:.98,metalness:.02,transparent:true,opacity:.42}),x,-.167,z);stain.rotation.x=-Math.PI/2;stain.receiveShadow=true;}
 for(const [x,z,s] of [[-2.7,2.1,.7],[1.8,-2.2,.9],[4.7,2.8,.65]]){const skid=add(new THREE.PlaneGeometry(.9*s,.1*s),new THREE.MeshStandardMaterial({color:'#2e3134',roughness:1,metalness:0,transparent:true,opacity:.35}),x,-.166,z);skid.rotation.x=-Math.PI/2;skid.rotation.z=.35;}
+// Zusätzliche Hallendetails für realistischeren Boden und Frontbereich.
+for(const z of [-5.7,-2.2,1.4,4.9]){const drain=add(new THREE.BoxGeometry(13.6,.012,.12),new THREE.MeshStandardMaterial({color:'#4d5459',roughness:.82,metalness:.55}),0,-.146,z);drain.receiveShadow=true;}
+for(const x of [-4.8,-1.6,1.6,4.8]){const aisle=add(new THREE.PlaneGeometry(.14,14.8),new THREE.MeshStandardMaterial({color:'#d8c26c',roughness:.92,metalness:0,transparent:true,opacity:.58}),x,-.164,-.2);aisle.rotation.x=-Math.PI/2;}
+for(const [x,z,w,d] of [[-5.0,6.0,2.6,1.4],[-1.3,6.0,2.4,1.2]]){const pad=add(new THREE.PlaneGeometry(w,d),new THREE.MeshStandardMaterial({color:'#61686c',roughness:.95,metalness:.02,transparent:true,opacity:.42}),x,-.163,z);pad.rotation.x=-Math.PI/2;}
+for(const x of [-8.84,8.84]) box(.08,.92,18,dark,x,.46,0);
+box(18,.92,.08,dark,0,.46,-9.1);
+// Vorderfassade mit Werkstatttor.
+box(6.0,1.05,.24,wall,0,4.58,9.38);
+box(5.8,1.12,.20,steel,0,4.03,9.26);
+box(5.9,.12,.18,dark,0,3.45,9.24);
+box(6.6,5,.18,wall,-5.7,2.5,9.42);
+box(6.6,5,.18,wall,5.7,2.5,9.42);
+box(.24,5,.24,steel,-2.95,2.5,9.34);box(.24,5,.24,steel,2.95,2.5,9.34);
+const doorFrame=new THREE.Group();doorFrame.position.set(0,0,0);scene.add(doorFrame);
+const doorSlats=new THREE.Group();scene.add(doorSlats);doorSlats.position.set(0,1.92,9.24);
+for(let i=0;i<14;i++){const slat=add(new THREE.BoxGeometry(5.72,.16,.06),new THREE.MeshStandardMaterial({color:'#c1c7cb',roughness:.52,metalness:.58}),0,1.12-i*.17,0,doorSlats);if(i%2)slat.material.color.offsetHSL(0,0,-.04);}
+box(.10,3.65,.10,steel,-2.78,1.83,9.18);box(.10,3.65,.10,steel,2.78,1.83,9.18);
+const outside=add(new THREE.PlaneGeometry(16,9),new THREE.MeshBasicMaterial({color:'#9bb7c8'}),0,3.6,10.9);outside.rotation.y=Math.PI;outside.castShadow=false;
+const outsideGround=add(new THREE.PlaneGeometry(18,10),new THREE.MeshStandardMaterial({color:'#6f756e',roughness:.96,metalness:0}),0,-.165,14.3);outsideGround.rotation.x=-Math.PI/2;outsideGround.receiveShadow=true;
+const doorSign=textSign('ROLLTOR / SERVICE',0,4.93,9.18,3.4);
+let doorOpenTarget=0,doorOpen=0;
+let hallLightsOn=true;const hallLights=[];
 // Architectural detail: columns, steel bracing, pipework and overhead fixtures.
 const matteBlack=m('#151c22',.73,.45),painted=m('#acb4ad',.57,.42),hazard=m('#e9b44c',.65,.12),rubber=m('#22262a',.99,.04),windowFrame=m('#232d33',.45,.6);
 for(let x of [-8.5,-4.25,0,4.25,8.5]){
@@ -91,7 +115,11 @@ for(let i=0;i<13;i++){const a=-7.5+i*1.2;const stain=add(new THREE.CircleGeometr
 // Assembly station with physically graspable tools and sorting bins.
 box(4.6,.17,1.5,wood,-1,1,-2.5);for(const x of [-3.1,1.1])for(const z of [-3.13,-1.86])box(.10,.95,.10,steel,x,.50,z);box(4.4,.20,.11,dark,-1,1.7,-3.2);box(4.4,.8,.10,dark,-1,1.42,-3.3);for(let i=0;i<6;i++){beam([-2.8+i*.65,1.32,-3.19],[-2.8+i*.65,1.54,-3.19],.024,steel)}
 textSign('WERKZEUGSTATION / 01',-1,2.8,-9.29,5);textSign('SICHERHEIT ZUERST',5.4,2.3,-9.29,3.2);
+// Dashboard der Berufe am Halleneingang.
+box(4.0,1.8,.12,dark,0,2.0,7.95); textSign('BERUFSBEREICHE',0,2.6,7.88,3.4);
+textSign('KFZ / MECHATRONIK',-1.4,1.95,7.88,2.2); textSign('ELEKTRO / VERDRAHTUNG',1.45,1.95,7.88,2.5);
 for(let j=0;j<2;j++){const x=4.6+j*1.5;box(1.3,.12,1.5,steel,x,.86,-2.5);for(const xx of [-.55,.55])for(const zz of [-.55,.55])box(.07,.8,.07,dark,x+xx,.42,-2.5+zz)}
+// Elektrobereich folgt unten.
 // interactive tools as detailed geometries, not game-engine placeholders; only car uses external GLB.
 const grabbables=[];function tool(name,x,y,z,kind){const root=new THREE.Group();root.position.set(x,y,z);scene.add(root);if(kind==='wrench'){const stem=box(.055,.04,.48,steel,0,.02,0,root);const ring=add(new THREE.TorusGeometry(.102,.038,10,24),steel,0,.02,-.3,root);ring.rotation.x=Math.PI/2;const jaw=add(new THREE.TorusGeometry(.088,.027,8,18,Math.PI*1.55),steel,0,.02,.26,root);jaw.rotation.x=Math.PI/2}else{box(.11,.085,.2,orange,0,.03,.08,root);box(.07,.20,.105,black,0,-.1,.08,root);beam([0,.03,.15],[0,.03,-.28],.037,steel,root);cyl(.07,.08,steel,0,.03,-.3,root).rotation.x=Math.PI/2}root.userData={name,kind,heldBy:null,home:new THREE.Vector3(x,y,z),snapped:false,gripOffset:new THREE.Vector3(0,.015,0),gripEuler:new THREE.Euler(0,0,Math.PI/2)};
 if(kind==='driver'){root.userData.gripOffset.set(0,-.018,.028);root.userData.gripEuler.set(-0.72,0,0);}
@@ -103,6 +131,89 @@ wrench.rotation.y=.7;driver.rotation.y=-.5;
 const hammer=tool('Hammer',-1.45,1.19,-2.42,'hammer');
 hammer.userData.gripOffset.set(.095,.005,0);
 hammer.userData.gripEuler.set(0,Math.PI,Math.PI/2);
+
+// --- Elektro-Trainingsbereich (erste Verdrahtungsaufgabe) ---
+const electroRoot=new THREE.Group(); electroRoot.position.set(5.2,0,5.45); scene.add(electroRoot);
+box(4.1,.12,1.35,wood,0,.95,0,electroRoot); for(const x of [-1.82,1.82]) for(const z of [-.56,.56]) box(.08,.82,.08,steel,x,.41,z,electroRoot);
+box(4.6,3.0,.10,wall,0,2.42,-.72,electroRoot); box(4.25,.12,.22,dark,0,3.90,-.69,electroRoot);
+textSign('ELEKTRO / SCHALTSCHRANKTRAINING',5.2,4.35,4.55,4.7);
+textSign('LAMPE + SCHALTER VERDRAHTEN',5.25,3.65,4.55,4.0);
+// Schaltschrankgehäuse
+const cabinet=new THREE.Group(); cabinet.position.set(-1.05,1.14,.03); electroRoot.add(cabinet);
+const cabinetShell=new THREE.MeshStandardMaterial({color:'#f4f4f4',roughness:.93,metalness:.05});
+box(1.82,2.12,.18,cabinetShell,0,1.06,0,cabinet); box(1.66,1.92,.05,new THREE.MeshStandardMaterial({color:'#fbfbfb',roughness:.98,metalness:.02}),0,1.06,.08,cabinet);
+box(1.62,.07,.06,steel,0,1.54,.11,cabinet); box(1.62,.07,.06,steel,0,.76,.11,cabinet);
+// Obere N/PE-Schienen und Automaten
+box(.46,.16,.12,new THREE.MeshStandardMaterial({color:'#2ca5d8',roughness:.5,metalness:.1}),.32,1.86,.11,cabinet); box(.46,.16,.12,new THREE.MeshStandardMaterial({color:'#61bc63',roughness:.5,metalness:.1}),.82,1.86,.11,cabinet);
+for(const x of [-.64,-.46,-.28,-.10,.08,.26,.44,.62]) box(.12,.42,.18,new THREE.MeshStandardMaterial({color:'#f0f0f0',roughness:.85,metalness:.04}),x,.18,.12,cabinet);
+box(.32,.42,.26,new THREE.MeshStandardMaterial({color:'#f8f8f8',roughness:.86,metalness:.05}),1.02,.18,.12,cabinet);
+for(const x of [-.64,-.46,-.28,-.10,.08,.26,.44,.62]) box(.08,.10,.04,black,x,.30,.23,cabinet);
+box(.12,.12,.04,black,1.17,.21,.23,cabinet);
+// Lampen-/Schaltertafel
+const demoPanel=new THREE.Group(); demoPanel.position.set(1.35,1.20,-.01); electroRoot.add(demoPanel);
+box(1.42,1.7,.12,new THREE.MeshStandardMaterial({color:'#e9ebee',roughness:.9,metalness:.05}),0,1.15,0,demoPanel);
+box(.48,.48,.06,new THREE.MeshStandardMaterial({color:'#f7f7f7',roughness:.85,metalness:.03}),0,1.92,.07,demoPanel);
+const lampBulb=add(new THREE.SphereGeometry(.12,24,18),new THREE.MeshStandardMaterial({color:'#fff8da',emissive:'#221500',emissiveIntensity:.2,roughness:.45,metalness:0}),0,1.92,.12,demoPanel);
+const lampHalo=add(new THREE.CircleGeometry(.24,28),new THREE.MeshBasicMaterial({color:'#fff0aa',transparent:true,opacity:.0,side:THREE.DoubleSide}),0,1.92,.18,demoPanel); lampHalo.castShadow=false;
+box(.42,.42,.06,new THREE.MeshStandardMaterial({color:'#fafafa',roughness:.88,metalness:.03}),0,.92,.07,demoPanel);
+const switchLever=box(.08,.24,.03,new THREE.MeshStandardMaterial({color:'#20252b',roughness:.8,metalness:.25}),0,.92,.12,demoPanel);
+const switchHit=box(.28,.28,.10,new THREE.MeshBasicMaterial({transparent:true,opacity:0}),0,.92,.13,demoPanel); switchHit.userData.role='switchToggle';
+const electroTerminals=[]; const electroWires=[]; let selectedTerminal=null; let switchOn=false; let lampOn=false;
+function makeTerminal(id,label,color,x,y,z,parent,role='terminal'){
+  const g=new THREE.Group(); g.position.set(x,y,z); parent.add(g);
+  const head=add(new THREE.CylinderGeometry(.04,.04,.05,18),new THREE.MeshStandardMaterial({color,roughness:.55,metalness:.35}),0,0,0,g); head.rotation.x=Math.PI/2;
+  const ring=add(new THREE.TorusGeometry(.052,.008,8,24),new THREE.MeshBasicMaterial({color:0xf7f3d2}),0,0,.028,g); ring.userData.ring=true; ring.rotation.x=Math.PI/2; ring.visible=false;
+  const c=document.createElement('canvas'); c.width=256; c.height=96; const cx=c.getContext('2d');
+  cx.fillStyle='#102533'; cx.fillRect(0,0,256,96); cx.strokeStyle='#d9bd82'; cx.lineWidth=6; cx.strokeRect(4,4,248,88); cx.fillStyle='#f1e4c6'; cx.font='bold 34px Arial'; cx.textAlign='center'; cx.textBaseline='middle'; cx.fillText(label,128,49);
+  const tx=new THREE.CanvasTexture(c); tx.colorSpace=THREE.SRGBColorSpace;
+  const lp=add(new THREE.PlaneGeometry(.34,.12),new THREE.MeshBasicMaterial({map:tx,side:THREE.DoubleSide}),0,.13,.06,g); lp.castShadow=false;
+  g.userData={id,label,role}; electroTerminals.push(g); return g;
+}
+const sourceL=makeTerminal('L_IN','L',0x7d4a2f,-.25,2.17,.23,electroRoot);
+const sourceN=makeTerminal('N_IN','N',0x3188e6,.15,2.17,.23,electroRoot);
+const sourcePE=makeTerminal('PE_IN','PE',0x5cad52,.55,2.17,.23,electroRoot);
+const swIn=makeTerminal('SW_IN','S1',0x9a5b36,1.10,1.00,.22,electroRoot);
+const swOut=makeTerminal('SW_OUT','S2',0x9a5b36,1.60,1.00,.22,electroRoot);
+const lampL=makeTerminal('LAMP_L','LAMP L',0x9a5b36,1.12,2.06,.22,electroRoot);
+const lampN=makeTerminal('LAMP_N','LAMP N',0x3188e6,1.60,2.06,.22,electroRoot);
+const lampPE=makeTerminal('LAMP_PE','LAMP PE',0x5cad52,1.36,1.65,.22,electroRoot);
+const electroPairs=[['L_IN','SW_IN','#7d4a2f'],['SW_OUT','LAMP_L','#7d4a2f'],['N_IN','LAMP_N','#3188e6'],['PE_IN','LAMP_PE','#5cad52']];
+function terminalById(id){return electroTerminals.find(t=>t.userData.id===id)}
+function connectionKey(a,b){return [a,b].sort().join('|')}
+function hasWire(a,b){return electroWires.some(w=>w.key===connectionKey(a,b))}
+function addElectroWire(a,b,color){
+  const ap=worldPosition(a), bp=worldPosition(b); const mid=ap.clone().lerp(bp,.5); mid.y+=.16;
+  const curve=new THREE.QuadraticBezierCurve3(ap,mid,bp); const pts=curve.getPoints(20);
+  const geo=new THREE.TubeGeometry(curve,20,.014,10,false); const mat=new THREE.MeshStandardMaterial({color,roughness:.65,metalness:.12});
+  const mesh=new THREE.Mesh(geo,mat); mesh.castShadow=true; mesh.receiveShadow=true; scene.add(mesh); electroWires.push({key:connectionKey(a.userData.id,b.userData.id),mesh,a:a.userData.id,b:b.userData.id,color});
+}
+function resetElectro(){ for(const w of electroWires) scene.remove(w.mesh); electroWires.length=0; selectedTerminal=null; switchOn=false; updateSwitchVisual(); updateLamp(); notice('Elektro-Übung zurückgesetzt'); }
+function electroReady(){ return electroPairs.every(([a,b])=>hasWire(a,b)) }
+function updateLamp(){ lampOn=electroReady() && switchOn; lampBulb.material.emissive.set(lampOn?'#ffd86e':'#221500'); lampBulb.material.emissiveIntensity=lampOn?1.6:.2; lampHalo.material.opacity=lampOn?.42:0; }
+function updateSwitchVisual(){ switchLever.rotation.z=switchOn?-0.55:.55; switchLever.position.x=switchOn?.04:-.04; updateLamp(); }
+updateSwitchVisual();
+function selectElectro(ray){
+  const hits=ray.intersectObjects([electroRoot],true); if(!hits.length)return false;
+  let o=hits[0].object; while(o && o!==electroRoot){
+    if(o.userData&&o.userData.role==='switchToggle'){ if(!electroReady()){notice('Verdrahtung noch unvollständig: L, N und PE zuerst verbinden');} else {switchOn=!switchOn; updateSwitchVisual(); notice(switchOn?(lampOn?'Lampe leuchtet · Schaltung korrekt':'Schalter an'):'Schalter aus');} return true; }
+    if(o.userData&&o.userData.role==='terminal'){ const t=o; if(selectedTerminal===t){ selectedTerminal=null; notice('Kontakt abgewählt'); return true; }
+      for(const term of electroTerminals){ const ring=term.children.find(c=>c.userData&&c.userData.ring); if(ring) ring.visible=false; }
+      const tring=t.children.find(c=>c.userData&&c.userData.ring); if(tring) tring.visible=true;
+      if(!selectedTerminal){ selectedTerminal=t; notice('Startklemme gewählt: '+t.userData.label); return true; }
+      if(selectedTerminal===t){ selectedTerminal=null; return true; }
+      if(hasWire(selectedTerminal.userData.id,t.userData.id)){ notice('Diese Verbindung besteht bereits'); selectedTerminal=null; return true; }
+      let pair=electroPairs.find(([a,b])=>connectionKey(a,b)===connectionKey(selectedTerminal.userData.id,t.userData.id));
+      if(!pair){ notice('Diese Verbindung gehört nicht zur aktuellen Aufgabe'); selectedTerminal=null; return true; }
+      addElectroWire(selectedTerminal,t,pair[2]);
+      selectedTerminal=null; updateLamp();
+      const done=electroWires.length; notice('Verbindung gesetzt ('+done+'/'+electroPairs.length+')');
+      return true;
+    }
+    o=o.parent;
+  }
+  return false;
+}
+function updateElectroFeedback(){ const ok=electroWires.length; feedback.textContent='Elektro: '+ok+'/'+electroPairs.length+' Verbindungen · Schalter '+(switchOn?'AN':'AUS')+' · Lampe '+(lampOn?'AN':'AUS'); }
 // Names and dimensions from the three uploaded TRELLIS GLBs. The original
 // mesh axes vary between assets; local transforms are intentionally independent
 // of the actual hand grip calibration.
@@ -312,7 +423,11 @@ function nearestWheelMount(pos,maxDist=.48){
 let completed=new Set(),pickCount=0;const task=document.querySelector('#task'),feedback=document.querySelector('#feedback'),msg=document.querySelector('#msg');function notice(t){msg.textContent=t;statusText(t)}
 const hudCanvas=document.createElement('canvas');hudCanvas.width=1024;hudCanvas.height=256;const hx=hudCanvas.getContext('2d');const hudTexture=new THREE.CanvasTexture(hudCanvas);hudTexture.colorSpace=THREE.SRGBColorSpace;const hudMesh=add(new THREE.PlaneGeometry(2.9,.72),new THREE.MeshBasicMaterial({map:hudTexture,transparent:true,side:THREE.DoubleSide}),-1,3.25,-3.23);hudMesh.castShadow=false;
 function statusText(str){hx.clearRect(0,0,1024,256);hx.fillStyle='#152b36';hx.fillRect(0,0,1024,256);hx.strokeStyle='#efb759';hx.lineWidth=9;hx.strokeRect(4,4,1016,248);hx.fillStyle='#f4e5c5';hx.font='bold 49px Arial';hx.textAlign='center';const words=str.split(' ');let lines=[''];for(let w of words){let n=lines[lines.length-1]+' '+w;if(hx.measureText(n).width>920)lines.push(w);else lines[lines.length-1]=n}lines.slice(0,3).forEach((line,i)=>hx.fillText(line,512,95+i*62));hudTexture.needsUpdate=true}
-function refresh(){task.textContent='Aufgabe: Reifen vom Ständer aufnehmen, an die Radnabe bringen und mit dem Akkuschrauber fixieren.';statusText('RADWECHSEL · REIFEN MONTIEREN · FESTSCHRAUBEN')};refresh();
+function refresh(){
+ if(activeTrade==='elektro'){task.textContent='Aufgabe: Verdrahte den Stromkreis: L → Schalter, Schalter → Lampe, N → Lampe, PE → Lampe. Danach Schalter betätigen.';statusText('ELEKTRO · SCHALTSCHRANK · VERDRAHTUNG');}
+ else if(activeTrade==='kfz'){task.textContent='Aufgabe: Reifentraining und Schraubstation in der Kfz-Bucht nutzen.';statusText('KFZ · REIFEN · WERKZEUGE');}
+ else {task.textContent='Aufgabe: Wähle am Dashboard einen Berufsbereich. Neu: Elektro mit Schaltschrank, Lampe und Schalter.';statusText('DASHBOARD · KFZ · ELEKTRO');}
+};refresh();
 
 // 3D-Hilfspult für Quest: Reset, Zentrieren und Werkzeuge zurücksetzen ohne Tastatur.
 const worldButtons=[];
@@ -327,14 +442,30 @@ function makeWorldButton(label,x,y,z,color,action){
 makeWorldButton('RESET',1.95,1.58,-3.06,0xaa5d33,'resetAll');
 makeWorldButton('ZENTRIEREN',1.95,1.40,-3.06,0x3d6a8a,'recenter');
 makeWorldButton('WERKZEUGE',1.95,1.22,-3.06,0x4f7857,'toolsHome');
-function recenterPlayer(){rig.position.set(0,0,7);rig.rotation.set(0,0,0);notice('Zur Startposition zentriert');}
+makeWorldButton('TOR',1.95,1.04,-3.06,0x707d87,'toggleDoor');
+makeWorldButton('LICHT',1.95,0.86,-3.06,0xc39a44,'toggleLights');
+makeWorldButton('DASHBOARD',-1.55,1.58,7.72,0x406173,'goDashboard');
+makeWorldButton('KFZ',0,1.22,7.72,0xba6a33,'goKfz');
+makeWorldButton('ELEKTRO',1.75,1.22,7.72,0x4c9f6f,'goElektro');
+function moveToZone(name){const dest=zoneTargets[name]||zoneTargets.dashboard;activeTrade=name==='kfz'||name==='elektro'?name:'dashboard';teleport(dest);refresh();notice('Bereich gewechselt: '+(activeTrade==='kfz'?'Kfz':activeTrade==='elektro'?'Elektro':'Dashboard'));}
+function recenterPlayer(){rig.position.set(0,0,7);rig.rotation.set(0,0,0);activeTrade='dashboard';refresh();notice('Zur Startposition zentriert');}
 function resetToolsHome(){
   for(let i=0;i<held.length;i++){if(held[i]){scene.attach(held[i]);held[i].userData.heldBy=null;held[i]=null;}}
   if(desktopHeld){scene.attach(desktopHeld);desktopHeld.userData.heldBy=null;desktopHeld=null;}
   for(const o of grabbables){scene.attach(o);o.userData.heldBy=null;o.userData.snapped=false;o.position.copy(o.userData.home);if(o.userData.homeQuat)o.quaternion.copy(o.userData.homeQuat);else if(o.userData.homeRot)o.rotation.copy(o.userData.homeRot);else o.rotation.set(0,o===driver?-0.5:(o===wrench?.7:0),0);}
   notice('Werkzeuge auf Ausgangspositionen zurückgesetzt');
 }
-function activateWorldAction(action){if(action==='resetAll'){resetScrew();resetWheelTasks();resetToolsHome();return true;}if(action==='recenter'){recenterPlayer();return true;}if(action==='toolsHome'){resetToolsHome();return true;}return false;}
+function activateWorldAction(action){
+ if(action==='resetAll'){resetScrew();resetWheelTasks();resetToolsHome();return true;}
+ if(action==='recenter'){recenterPlayer();return true;}
+ if(action==='toolsHome'){resetToolsHome();return true;}
+ if(action==='toggleDoor'){doorOpenTarget=doorOpenTarget>0.5?0:1;notice(doorOpenTarget?'Rolltor öffnet':'Rolltor schließt');return true;}
+ if(action==='toggleLights'){hallLightsOn=!hallLightsOn;for(const l of hallLights){if(l.intensity!==undefined){if(l.userData.baseIntensity==null)l.userData.baseIntensity=l.intensity;l.intensity=l.userData.baseIntensity*(hallLightsOn?1:0.38);}}notice(hallLightsOn?'Hallenlicht an':'Hallenlicht gedimmt');return true;}
+ if(action==='goDashboard'){moveToZone('dashboard');return true;}
+ if(action==='goKfz'){moveToZone('kfz');return true;}
+ if(action==='goElektro'){moveToZone('elektro');return true;}
+ return false;
+}
 function selectWorldButton(ray){const hits=ray.intersectObjects(worldButtons,true);if(!hits.length)return false;let o=hits[0].object;while(o){if(o.userData&&o.userData.action){activateWorldAction(o.userData.action);return true;}o=o.parent;}return false;}
 function worldPosition(o){return o.getWorldPosition(new THREE.Vector3())}
 function nearestTool(pos,maxDist=.42){
@@ -499,6 +630,7 @@ function handleXRSelect(ray,index){
  const origin=ray.getWorldPosition(new THREE.Vector3()),q=ray.getWorldQuaternion(new THREE.Quaternion());
  helperRay.ray.origin.copy(origin);helperRay.ray.direction.set(0,0,-1).applyQuaternion(q);
  if(selectWorldButton(helperRay))return true;
+ if(selectElectro(helperRay))return true;
  if(cartSelect(helperRay))return true;
  return false;
 }
@@ -539,9 +671,12 @@ function cartTick(dt){cartDrawers.forEach((d,i)=>{if(!d)return;cartTravel[i]=THR
 for(let i=0;i<2;i++){const ctrl=renderer.xr.getController(i);ctrl.addEventListener('selectstart',()=>{if(!renderer.xr.isPresenting)return;const origin=ctrl.getWorldPosition(new THREE.Vector3()),q=ctrl.getWorldQuaternion(new THREE.Quaternion());cartRay.ray.origin.copy(origin);cartRay.ray.direction.set(0,0,-1).applyQuaternion(q);cartSelect(cartRay)})}
 
 // Desktop test mode, similar task logic with pointer lock and camera-relative pickup.
-const keys={};let yaw=0,pitch=0,locked=false,desktopHeld=null;document.getElementById('enter').onclick=()=>{document.getElementById('splash').style.display='none';renderer.domElement.requestPointerLock?.()};document.addEventListener('pointerlockchange',()=>locked=document.pointerLockElement===renderer.domElement);document.addEventListener('mousemove',e=>{if(locked&&!renderer.xr.isPresenting){yaw-=e.movementX*.0022;pitch=THREE.MathUtils.clamp(pitch-e.movementY*.0022,-1.4,1.4)}});document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='KeyB'&&desktopHeld===driver)motor(true,'desktop');if(e.code==='KeyR')resetScrew();if(e.code==='KeyQ')snapTurn(1);if(e.code==='KeyE')snapTurn(-1);if(e.code==='KeyT'&&!renderer.xr.isPresenting){const dest=projectTeleport(camera);if(dest)teleport(dest)}});document.addEventListener('keyup',e=>{keys[e.code]=false;if(e.code==='KeyB'&&motorOwner==='desktop')motor(false)});
-renderer.domElement.addEventListener('click',()=>{if(renderer.xr.isPresenting)return;if(!locked){renderer.domElement.requestPointerLock?.();return}const center=camera.getWorldPosition(new THREE.Vector3());const forward=new THREE.Vector3(0,0,-1).applyQuaternion(camera.getWorldQuaternion(new THREE.Quaternion()));helperRay.ray.origin.copy(center);helperRay.ray.direction.copy(forward);if(selectWorldButton(helperRay))return;if(desktopHeld){release(desktopHeld);desktopHeld=null;return}let candidate=null,best=2.4;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;const delta=worldPosition(o).sub(center);const depth=delta.dot(forward);const deviation=delta.clone().addScaledVector(forward,-depth).length();if(depth>0&&depth<2.5&&deviation<.42&&depth<best){candidate=o;best=depth}}if(candidate){take(candidate,camera,'desktop');candidate.position.set(.23,-.22,-.64);desktopHeld=candidate}});
-let last=performance.now();renderer.setAnimationLoop(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.06);last=now;if(!renderer.xr.isPresenting){camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);const f=Number(!!keys.KeyW)-Number(!!keys.KeyS),r=Number(!!keys.KeyD)-Number(!!keys.KeyA);const dir=new THREE.Vector3(-Math.sin(yaw)*f+Math.cos(yaw)*r,0,-Math.cos(yaw)*f-Math.sin(yaw)*r);if(dir.lengthSq()){dir.normalize().multiplyScalar(dt*(keys.ShiftLeft?4:2.1));const next=rig.position.clone().add(dir);if(validFloor(next))rig.position.copy(next)}}else{updateSticks(dt);updateTeleportVisual();updateHandPowerGrips()}cartTick(dt);workTick(dt);wheelTick(dt);renderer.render(scene,camera)});
+const keys={};let yaw=0,pitch=0,locked=false,desktopHeld=null;document.getElementById('enter').onclick=()=>{document.getElementById('splash').style.display='none';renderer.domElement.requestPointerLock?.()};document.addEventListener('pointerlockchange',()=>locked=document.pointerLockElement===renderer.domElement);document.addEventListener('mousemove',e=>{if(locked&&!renderer.xr.isPresenting){yaw-=e.movementX*.0022;pitch=THREE.MathUtils.clamp(pitch-e.movementY*.0022,-1.4,1.4)}});document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='Digit1')moveToZone('dashboard');if(e.code==='Digit2')moveToZone('kfz');if(e.code==='Digit3')moveToZone('elektro');if(e.code==='KeyB'&&desktopHeld===driver)motor(true,'desktop');if(e.code==='KeyR')resetScrew();if(e.code==='KeyQ')snapTurn(1);if(e.code==='KeyE')snapTurn(-1);if(e.code==='KeyT'&&!renderer.xr.isPresenting){const dest=projectTeleport(camera);if(dest)teleport(dest)}});document.addEventListener('keyup',e=>{keys[e.code]=false;if(e.code==='KeyB'&&motorOwner==='desktop')motor(false)});
+renderer.domElement.addEventListener('click',()=>{if(renderer.xr.isPresenting)return;if(!locked){renderer.domElement.requestPointerLock?.();return}const center=camera.getWorldPosition(new THREE.Vector3());const forward=new THREE.Vector3(0,0,-1).applyQuaternion(camera.getWorldQuaternion(new THREE.Quaternion()));helperRay.ray.origin.copy(center);helperRay.ray.direction.copy(forward);if(selectWorldButton(helperRay))return;if(selectElectro(helperRay))return;if(desktopHeld){release(desktopHeld);desktopHeld=null;return}let candidate=null,best=2.4;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;const delta=worldPosition(o).sub(center);const depth=delta.dot(forward);const deviation=delta.clone().addScaledVector(forward,-depth).length();if(depth>0&&depth<2.5&&deviation<.42&&depth<best){candidate=o;best=depth}}if(candidate){take(candidate,camera,'desktop');candidate.position.set(.23,-.22,-.64);desktopHeld=candidate}});
+document.getElementById('goStart').onclick=()=>moveToZone('dashboard');
+document.getElementById('goKfz').onclick=()=>moveToZone('kfz');
+document.getElementById('goElektro').onclick=()=>moveToZone('elektro');
+let last=performance.now();renderer.setAnimationLoop(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.06);last=now;doorOpen=THREE.MathUtils.damp(doorOpen,doorOpenTarget,5.4,dt);doorSlats.position.y=1.92+doorOpen*2.58;if(!renderer.xr.isPresenting){camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);const f=Number(!!keys.KeyW)-Number(!!keys.KeyS),r=Number(!!keys.KeyD)-Number(!!keys.KeyA);const dir=new THREE.Vector3(-Math.sin(yaw)*f+Math.cos(yaw)*r,0,-Math.cos(yaw)*f-Math.sin(yaw)*r);if(dir.lengthSq()){dir.normalize().multiplyScalar(dt*(keys.ShiftLeft?4:2.1));const next=rig.position.clone().add(dir);if(validFloor(next))rig.position.copy(next)}}else{updateSticks(dt);updateTeleportVisual();updateHandPowerGrips()}cartTick(dt);workTick(dt);wheelTick(dt);if(activeTrade==='elektro')updateElectroFeedback();renderer.render(scene,camera)});
 // Stop audio upon session ending or backgrounding.
 document.addEventListener('visibilitychange',()=>{if(document.hidden)motor(false)});
 const btn=VRButton.createButton(renderer, { optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking'] });document.getElementById('vr').appendChild(btn);btn.style.position='static';btn.style.margin='0';
