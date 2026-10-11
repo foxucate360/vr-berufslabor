@@ -82,8 +82,9 @@ for(let i=0;i<4;i++){const tyre=add(new THREE.TorusGeometry(.33,.12,12,30),rubbe
 // Wall mounted electrical box and emergency stop.
 box(.58,.85,.20,painted,-8.77,1.75,-1.75);box(.2,.2,.13,red,-8.62,1.65,-1.61);box(.1,.24,.1,matteBlack,-8.65,1.97,-1.60);
 // Hydraulic car lift beams and safety labels (static visual).
-for(const x of [-7.7,-3.1]){box(.28,3.5,.36,dark,x,1.75,2.4);box(.35,.4,.41,hazard,x,2.7,2.4);box(.47,.1,.67,matteBlack,x,.14,2.4)}
-box(4.4,.16,.36,steel,-5.4,.64,2.4);box(4.4,.16,.36,steel,-5.4,.64,3.4);
+// Freie Kfz-Arbeitsbucht: Stützen seitlich außerhalb des Fahrzeugkörpers, keine Durchdringung.
+for(const x of [-8.5,-1.5]){box(.20,3.5,.25,dark,x,1.75,1.1);box(.29,.3,.31,hazard,x,2.7,1.1);box(.38,.10,.52,matteBlack,x,.12,1.1)}
+for(const x of [-7.5,-2.5])for(const z of [2.0,4.9])box(.35,.035,.45,steel,x,.02,z);
 // Tool cabinet replaced by actual GLB with six moving drawers.
 // Ambient workshop signage, bands, floor stains and fasteners.
 for(let i=0;i<13;i++){const a=-7.5+i*1.2;const stain=add(new THREE.CircleGeometry(.12+(i%4)*.06,16),new THREE.MeshBasicMaterial({color:i%2?'#414b4b':'#545d5b',transparent:true,opacity:.25,depthWrite:false}),a,.004,1.4+(i%3)*1.8);stain.rotation.x=-Math.PI/2;stain.castShadow=false}
@@ -207,109 +208,94 @@ function resetScrew(){screwDepth=0;drillSeconds=0;screwGroup.position.z=.075;scr
 function wheelTick(dt){
  const tip=drillTip();
  for(const w of wheelTasks){
-   const hubPos=w.holder.localToWorld(new THREE.Vector3(0,0,w.side*.06));
-   const near=tip.distanceTo(hubPos)<.28;
-   w.ring.visible=w.mounted && !w.done && near;
-   if(w.ring)w.ring.material.color.set(w.done?'#89c99b':(w.mounted?'#64e6c6':'#6f7276'));
-   if(!w.mounted)continue;
-   if(motorOn && near && !w.done){
-     w.progress=Math.min(1,w.progress+dt*.55);
-     w.tire.position.z=w.side*(0.19-(0.14*w.progress));
-     if(audioOsc)audioOsc.frequency.setTargetAtTime(102, audioCtx.currentTime, .06);
-     if(w.progress>=1){w.done=true;w.tire.position.z=w.side*0.05;notice(w.name+' festgeschraubt');}
-   } else {
-     const target=w.done?0.05:0.19-(0.14*w.progress);
-     if(w.tire.parent===w.holder)w.tire.position.z=THREE.MathUtils.damp(w.tire.position.z,target,8,dt);
+   const hubPos=w.holder.getWorldPosition(new THREE.Vector3());
+   const near=tip.distanceTo(hubPos)<.30;
+   w.ring.visible=w.mounted&&!w.done&&near;
+   if(!w.mounted||w.done)continue;
+   // Befestigen erst nach dem Einrasten, nicht im freien Raum.
+   if(motorOn&&near){
+     w.progress=Math.min(1,w.progress+dt*.4);
+     if(w.tire.parent===w.holder)w.tire.position.x=w.side*(.13-.10*w.progress);
+     if(w.progress>=1){w.done=true;notice(w.name+' montiert und befestigt');}
    }
  }
- const finished=wheelTasks.filter(w=>w.done).length;
- if(feedback)feedback.textContent='Schraubfortschritt: '+Math.round(screwDepth*100)+' % · Reifen montiert: '+finished+'/4 · '+(motorOn?'Motor an':'Motor aus');
+ if(feedback)feedback.textContent='Schraubfortschritt: '+Math.round(screwDepth*100)+' % · Räder befestigt: '+wheelTasks.filter(w=>w.done).length+'/4';
 }
-
 // Two target sockets, color matching only after release.
 const sockets=[];for(const [i,x] of [[0,4.6],[1,6.1]]){const g=new THREE.Group();g.position.set(x,.97,-2.5);scene.add(g);const ring=add(new THREE.TorusGeometry(.22,.032,10,28),i===0?orange:green,0,.04,0,g);ring.rotation.x=Math.PI/2;box(.52,.02,.52,m('#2e393b',.9),0,-.035,0,g);sockets.push(g)}
 const infoPositions=[new THREE.Vector3(-1,1.2,-2.5),new THREE.Vector3(5.4,1.4,-2.5)];
 // Additional details and external high-resolution GLB to preserve the look of the prior scene.
 for(let x of [-7.5,-6.5,-5.5]){box(.8,2,.7,dark,x,1.1,-7);for(let i=0;i<5;i++){box(.68,.16,.03,steel,x,.45+i*.3,-6.63)}}
 for(let x of [3,5,7]){box(1.4,.07,1.1,steel,x,1.5,-7);for(let y of [.55,1,1.46])box(1.35,.05,1.05,dark,x,y,-7);for(let i=0;i<3;i++)box(.34,.26,.43,m(i===1?'#9c7154':'#556572'),x-.43+i*.44,1.67,-7)}
-const carAnchor=new THREE.Group();carAnchor.position.set(-5,0,2.7);scene.add(carAnchor);let carStatus='lädt';const loader=new GLTFLoader(),draco=new DRACOLoader();draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');loader.setDRACOLoader(draco);loader.load('https://threejs.org/examples/models/gltf/ferrari.glb',g=>{const o=g.scene;let b=new THREE.Box3().setFromObject(o);const size=b.getSize(new THREE.Vector3());o.scale.setScalar(3.35/Math.max(size.x,size.z));b.setFromObject(o);const center=b.getCenter(new THREE.Vector3());o.position.sub(center);o.position.y+=b.getSize(new THREE.Vector3()).y/2+.26;o.traverse(c=>{if(c.isMesh){c.castShadow=true;c.receiveShadow=true}});carAnchor.add(o);carStatus='geladen';},undefined,()=>{carStatus='nicht verfügbar';notice('Externes GLB-Fahrzeug konnte nicht geladen werden. Internetverbindung prüfen.');});
-// Reifenständer und echterer Radwechsel-Prototyp.
-// Vier Reifen liegen zunächst am Ständer. Sie müssen aufgenommen, zur Nabe getragen,
-// dort eingerastet und erst danach mit dem Akkuschrauber festgeschraubt werden.
-const wheelTasks=[];
-const tireTools=[];
+const carAnchor=new THREE.Group();carAnchor.position.set(-5,0,3.45);scene.add(carAnchor);
+let carStatus='lädt';const loader=new GLTFLoader(),draco=new DRACOLoader();
+draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');loader.setDRACOLoader(draco);
+let resolveVehicle;const carReady=new Promise(resolve=>resolveVehicle=resolve);
+loader.load('https://threejs.org/examples/models/gltf/ferrari.glb',g=>{
+ const o=g.scene;
+ let b=new THREE.Box3().setFromObject(o);const size=b.getSize(new THREE.Vector3());
+ o.scale.setScalar(3.75/Math.max(size.x,size.z));
+ b.setFromObject(o);const center=b.getCenter(new THREE.Vector3());
+ o.position.sub(center);o.position.y+=b.getSize(new THREE.Vector3()).y/2+.36;
+ o.traverse(c=>{if(c.isMesh){c.castShadow=true;c.receiveShadow=true}});
+ carAnchor.add(o);carAnchor.updateWorldMatrix(true,true);
+ const names=['wheel_fl','wheel_fr','wheel_rl','wheel_rr'];
+ const wheelAnchors=[];
+ for(const name of names){
+   const w=o.getObjectByName(name);
+   if(!w){console.warn('Radknoten fehlt',name);continue}
+   // Weltposition der originalen Reifen als geometrische Referenz.
+   const pos=w.getWorldPosition(new THREE.Vector3());
+   const center=new THREE.Box3().setFromObject(w).getCenter(new THREE.Vector3());
+   wheelAnchors.push({name,position:center});
+   w.visible=false; // Keine doppelten vorhandenen Räder.
+ }
+ carStatus=wheelAnchors.length===4?'geladen':'teilweise geladen';
+ resolveVehicle(wheelAnchors);
+},undefined,e=>{carStatus='nicht verfügbar';resolveVehicle([]);notice('Fahrzeug konnte nicht geladen werden');console.warn(e)});
+// Radpositionen stammen aus dem geladenen Auto, nicht aus geratenen Koordinaten.
+const wheelTasks=[],tireTools=[];
 function resetWheelTasks(){
-  for(const w of wheelTasks){
-    w.progress=0;w.done=false;w.mounted=false;
-    if(w.ring){w.ring.visible=false;w.ring.material.color.set('#64e6c6');}
-    if(w.tire){
-      scene.attach(w.tire);
-      w.tire.userData.snapped=false;
-      w.tire.userData.mountIndex=null;
-      w.tire.userData.heldBy=null;
-      w.tire.position.copy(w.tire.userData.home);
-      w.tire.rotation.copy(w.tire.userData.homeRot);
-    }
-  }
-  notice('Radwechsel zurückgesetzt');
+ for(const w of wheelTasks){
+   w.progress=0;w.done=false;w.mounted=false;
+   if(w.ring)w.ring.visible=false;
+   if(w.tire){scene.attach(w.tire);w.tire.userData.heldBy=null;w.tire.userData.snapped=false;
+     w.tire.position.copy(w.tire.userData.home);w.tire.quaternion.copy(w.tire.userData.homeQuat)}
+ }
+ notice('Radwechsel neu gestartet: Reifen am Ständer');
 }
-(function setupWheels(){
-  const mounts=[
-    {name:'Vorne links',pos:[1.03,.63,.86],side:1},
-    {name:'Hinten links',pos:[-1.03,.63,.86],side:1},
-    {name:'Vorne rechts',pos:[1.03,.63,-.86],side:-1},
-    {name:'Hinten rechts',pos:[-1.03,.63,-.86],side:-1}
-  ];
-  // Reifenständer links vor dem Fahrzeug
-  const rackRoot=new THREE.Group();rackRoot.position.set(-2.65,0,1.75);scene.add(rackRoot);
-  box(.14,1.45,.14,dark,-.44,.74,0,rackRoot);box(.14,1.45,.14,dark,.44,.74,0,rackRoot);
-  box(1.02,.09,.24,steel,0,.09,0,rackRoot);box(1.02,.09,.24,steel,0,1.34,0,rackRoot);
-  box(1.0,.05,.08,steel,0,.48,0,rackRoot);box(1.0,.05,.08,steel,0,.94,0,rackRoot);
-  textSign('REIFENSTÄNDER',-2.65,1.85,1.35,2.2);
-
-  const tireLoader=new GLTFLoader();
-  tireLoader.load('./assets/reifen.glb',g=>{
-    const base=g.scene;
-    const core=new THREE.Group();
-    const bb=new THREE.Box3().setFromObject(base);
-    const center=bb.getCenter(new THREE.Vector3());
-    base.position.sub(center);
-    base.traverse(n=>{if(n.isMesh){n.castShadow=true;n.receiveShadow=true;if(!n.material||!n.material.isMaterial){n.material=new THREE.MeshStandardMaterial({color:'#34383d',roughness:.94,metalness:.05});}}});
-    core.add(base);
-    core.rotation.y=Math.PI/2;
-    core.scale.set(.89,.66,.66);
-    const rackSlots=[[-2.98,.56,1.78],[-2.34,.56,1.78],[-2.98,1.02,1.78],[-2.34,1.02,1.78]];
-    mounts.forEach((data,idx)=>{
-      const holder=new THREE.Group();holder.position.set(...data.pos);carAnchor.add(holder);
-      const hub=add(new THREE.CylinderGeometry(.16,.16,.08,22),new THREE.MeshStandardMaterial({color:'#bcc8cf',roughness:.34,metalness:.88}),0,0,0,holder);hub.rotation.x=Math.PI/2;
-      for(let i=0;i<5;i++){const ang=i/5*Math.PI*2;const nut=cyl(.018,.03,new THREE.MeshStandardMaterial({color:'#dbe3e8',roughness:.18,metalness:.95}),Math.cos(ang)*.08,Math.sin(ang)*.08,data.side*.04,holder);nut.rotation.x=Math.PI/2;}
-      const ring=add(new THREE.TorusGeometry(.24,.009,8,28),new THREE.MeshBasicMaterial({color:'#64e6c6'}),0,0,data.side*.15,holder);ring.rotation.y=Math.PI/2;ring.visible=false;ring.castShadow=false;
-      const tireRoot=new THREE.Group();
-      tireRoot.name='Tire_'+(idx+1);
-      tireRoot.position.set(...rackSlots[idx]);
-      tireRoot.rotation.set(0,Math.PI/2,Math.PI/2);
-      const visual=core.clone(true); tireRoot.add(visual);
-      tireRoot.userData={
-        name:'Reifen '+(idx+1),kind:'tire',heldBy:null,snapped:false,
-        home:new THREE.Vector3(...rackSlots[idx]),homeRot:new THREE.Euler(0,Math.PI/2,Math.PI/2),
-        gripOffset:new THREE.Vector3(0,0,0),gripEuler:new THREE.Euler(0,0,0),
-        pickRadius:.52,mountIndex:idx
-      };
-      grabbables.push(tireRoot); scene.add(tireRoot); tireTools.push(tireRoot);
-      wheelTasks.push({name:data.name,holder,hub,ring,side:data.side,progress:0,done:false,mounted:false,tire:tireRoot});
-    });
-    notice('4 Reifen am Ständer bereit: aufnehmen, montieren und festschrauben');
-  },undefined,err=>{console.warn('Reifen-GLB nicht geladen',err);});
-})();
-function nearestWheelMount(pos,maxDist=.55){
-  let best=null,bestD=maxDist;
-  for(const w of wheelTasks){
-    if(w.mounted)continue;
-    const target=w.holder.localToWorld(new THREE.Vector3(0,0,w.side*.07));
-    const d=target.distanceTo(pos);
-    if(d<bestD){best=w;bestD=d;}
-  }
-  return best;
+const rackRoot=new THREE.Group();rackRoot.position.set(-2.45,0,2.6);scene.add(rackRoot);
+for(const x of [-.47,.47])box(.12,1.45,.12,dark,x,.74,0,rackRoot);
+for(const y of [.12,.74,1.36])box(1.06,.07,.27,steel,0,y,0,rackRoot);
+const rackSlots=[[-2.88,.54,2.65],[-2.05,.54,2.65],[-2.88,1.07,2.65],[-2.05,1.07,2.65]];
+Promise.all([carReady,new Promise(resolve=>new GLTFLoader().load('./assets/reifen.glb',g=>resolve(g.scene),undefined,()=>resolve(null)))]).then(([anchors,tireModel])=>{
+ if(!tireModel||anchors.length!==4){notice('Reifen-/Fahrzeugmodelle fehlen; Radwechsel nicht bereit');return}
+ const bb=new THREE.Box3().setFromObject(tireModel),size=bb.getSize(new THREE.Vector3());
+ const center=bb.getCenter(new THREE.Vector3());tireModel.position.sub(center);
+ // TRELLIS-Reifenachse ist X; Radius aus Y/Z. Physikalischer Reifendurchmesser etwa 0,65 m.
+ const scale=.65/Math.max(size.y,size.z);
+ const wheelBase=new THREE.Group();wheelBase.add(tireModel);wheelBase.scale.setScalar(scale);
+ for(let i=0;i<4;i++){
+   const wheelInfo=anchors[i],side=Math.sign(wheelInfo.position.x-carAnchor.position.x)||1;
+   const holder=new THREE.Group();holder.position.copy(wheelInfo.position);scene.add(holder);
+   const hub=add(new THREE.CylinderGeometry(.12,.12,.04,24),steel,0,0,0,holder);hub.rotation.z=Math.PI/2;
+   const ring=add(new THREE.TorusGeometry(.27,.011,8,40),new THREE.MeshBasicMaterial({color:'#5be2ae'}),side*.10,0,0,holder);ring.rotation.y=Math.PI/2;ring.visible=false;
+   const root=new THREE.Group();root.name='Reifen_'+(i+1);root.position.set(...rackSlots[i]);root.rotation.z=Math.PI/2;
+   root.add(wheelBase.clone(true));scene.add(root);
+   root.userData={name:'Reifen '+(i+1),kind:'tire',heldBy:null,snapped:false,
+     home:new THREE.Vector3(...rackSlots[i]),homeQuat:root.quaternion.clone(),
+     gripOffset:new THREE.Vector3(),gripEuler:new THREE.Euler(),pickRadius:.48,mountIndex:i};
+   grabbables.push(root);tireTools.push(root);
+   wheelTasks.push({name:wheelInfo.name,holder,hub,ring,side,progress:0,done:false,mounted:false,tire:root});
+ }
+ notice('Originalräder ausgeblendet; 4 GLB-Reifen montierbar');
+});
+function nearestWheelMount(pos,maxDist=.48){
+ let best=null,bestD=maxDist;
+ for(const w of wheelTasks){if(w.mounted)continue;
+   const target=w.holder.getWorldPosition(new THREE.Vector3());const d=pos.distanceTo(target);
+   if(d<bestD){best=w;bestD=d}}
+ return best;
 }
 // Tool task state. Feedback also displayed in headset by a scene-attached floating sign.
 
@@ -335,7 +321,7 @@ function recenterPlayer(){rig.position.set(0,0,7);rig.rotation.set(0,0,0);notice
 function resetToolsHome(){
   for(let i=0;i<held.length;i++){if(held[i]){scene.attach(held[i]);held[i].userData.heldBy=null;held[i]=null;}}
   if(desktopHeld){scene.attach(desktopHeld);desktopHeld.userData.heldBy=null;desktopHeld=null;}
-  for(const o of grabbables){scene.attach(o);o.userData.heldBy=null;o.userData.snapped=false;o.position.copy(o.userData.home);if(o.userData.homeRot)o.rotation.copy(o.userData.homeRot);else o.rotation.set(0,o===driver?-0.5:(o===wrench?.7:0),0);}
+  for(const o of grabbables){scene.attach(o);o.userData.heldBy=null;o.userData.snapped=false;o.position.copy(o.userData.home);if(o.userData.homeQuat)o.quaternion.copy(o.userData.homeQuat);else if(o.userData.homeRot)o.rotation.copy(o.userData.homeRot);else o.rotation.set(0,o===driver?-0.5:(o===wrench?.7:0),0);}
   notice('Werkzeuge auf Ausgangspositionen zurückgesetzt');
 }
 function activateWorldAction(action){if(action==='resetAll'){resetScrew();resetWheelTasks();resetToolsHome();return true;}if(action==='recenter'){recenterPlayer();return true;}if(action==='toolsHome'){resetToolsHome();return true;}return false;}
@@ -352,35 +338,27 @@ function nearestTool(pos,maxDist=.42){
  return best
 }
 function take(o,parent,index){
- if(!o || o.userData.heldBy!=null)return false;
- if(o.userData.kind==='tire' && o.userData.mountIndex!=null){const task=wheelTasks[o.userData.mountIndex]; if(task){task.mounted=false; task.done=false; task.progress=0;}}
- o.userData.heldBy=index; parent.attach(o);
- o.quaternion.setFromEuler(o.userData.gripEuler);
- const localGrip=o.userData.gripOffset.clone().applyQuaternion(o.quaternion);
- o.position.copy(localGrip.multiplyScalar(-1));
- if(o.userData.kind==='tire')o.position.set(0,-0.02,-0.12);
- pickCount++; refresh(); notice('Gegriffen: '+o.userData.name); return true;
+ if(!o||o.userData.heldBy!=null)return false;
+ if(o.userData.kind==='tire'&&o.userData.mountIndex!=null){const w=wheelTasks[o.userData.mountIndex];if(w){w.mounted=false;w.done=false;w.progress=0;}}
+ o.userData.heldBy=index;
+ // Parent.attach erhält bei der Aufnahme die tatsächliche Weltposition UND Rotation.
+ // Kein hartkodiertes Schwert-Pose-Override mehr.
+ parent.attach(o);
+ pickCount++;refresh();notice('Gegriffen: '+o.userData.name);return true;
 }
 function release(o){
  if(!o)return;
  if(o===driver)motor(false);
  scene.attach(o); o.userData.heldBy=null;
  if(o.userData.kind==='tire'){
-   const mount=nearestWheelMount(worldPosition(o), .62);
+   const mount=nearestWheelMount(worldPosition(o),.57);
    if(mount){
-     mount.holder.attach(o);
-     o.position.set(0,0,mount.side*0.19);
-     o.rotation.set(0,Math.PI/2,0);
-     o.userData.snapped=true; o.userData.mountIndex=wheelTasks.indexOf(mount);
-     mount.mounted=true; mount.done=false; mount.progress=0;
-     notice(mount.name+': Reifen angesetzt. Jetzt mit Akkuschrauber festschrauben.');
-   } else {
-     if(o.position.y<.35)o.position.y=.35;
-     if(o.position.x<-8||o.position.x>8||o.position.z<-9||o.position.z>9)o.position.copy(o.userData.home);
-     o.rotation.copy(o.userData.homeRot);
-     notice('Reifen losgelassen');
-   }
-   refresh(); return;
+     mount.holder.attach(o);o.position.set(mount.side*.13,0,0);
+     // Radachse liegt auf X; die Felge steht senkrecht zur Fahrbahn.
+     o.quaternion.identity();o.userData.snapped=true;mount.mounted=true;mount.done=false;mount.progress=0;
+     notice(mount.name+': Reifen sitzt an der Nabe; jetzt Befestigung anziehen');
+   }else{if(o.position.y<.35)o.position.y=.35;notice('Reifen abgelegt (außerhalb der Radnabe)');}
+   refresh();return;
  }
  let slot=o.userData.kind==='wrench'?sockets[0]:(o.userData.kind==='driver'?sockets[1]:null);
  if(slot && worldPosition(o).distanceTo(worldPosition(slot))<.48){o.userData.snapped=true;slot.attach(o);o.position.set(0,.13,0);o.rotation.set(0,0,0);completed.add(o.userData.kind);notice('Werkzeug abgelegt: '+o.userData.name)}
