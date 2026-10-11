@@ -353,11 +353,11 @@ function take(o,parent,index){
  o.userData.heldBy=index;
  parent.attach(o);
  if(o===driver){
-   // Griffmitte statt Akku: Modell (24 cm hoch) hat sein unteres Ende beim Akku.
-   // Die Hand soll etwa 10 cm oberhalb des Akkus liegen, mit Werkzeugachse nach vorn.
-   // Kontinuierliche Pose während des Haltens statt Position zum Aufnahmezeitpunkt.
-   o.quaternion.setFromEuler(new THREE.Euler(-Math.PI/2,0,0));
-   o.position.set(.018,-.075,-.13);
+   // Drei Dinge sind wichtig: keine Teleportation zum Akku, kein harter Rotationssprung,
+   // und dieselbe relative Lage zur greifenden Hand während des gesamten Haltens.
+   // Object3D.attach() oben bewahrt die exakte Weltpose beim Greifbeginn.
+   // Dadurch kann der Nutzer den Schrauber in seiner gewählten Orientierung greifen.
+   o.userData.grabPose=o.matrix.clone();
  }
  pickCount++;refresh();notice('Gegriffen: '+o.userData.name);return true;
 }
@@ -369,8 +369,11 @@ function release(o){
    const mount=nearestWheelMount(worldPosition(o),.57);
    if(mount){
      mount.holder.attach(o);o.position.set(mount.side*.13,0,0);
-     // Radachse liegt auf X; die Felge steht senkrecht zur Fahrbahn.
-     o.quaternion.identity();o.userData.snapped=true;mount.mounted=true;mount.done=false;mount.progress=0;
+     // Die Rechte/Linke Radseite haben entgegengesetzte Außen-Normalen.
+     // Für die gegenüberliegende Seite wird das Reifengitter um die Hochachse
+     // gedreht, sodass dieselbe Felgenseite nach außen zeigt.
+     o.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),mount.side<0?Math.PI:0);
+     o.userData.snapped=true;mount.mounted=true;mount.done=false;mount.progress=0;
      notice(mount.name+': Reifen sitzt an der Nabe; jetzt Befestigung anziehen');
    }else{if(o.position.y<.35)o.position.y=.35;notice('Reifen abgelegt (außerhalb der Radnabe)');}
    refresh();return;
