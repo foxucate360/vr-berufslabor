@@ -1,6 +1,6 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR BERUFSLABOR | ATELIER 09 · POWER GRIP</title><style>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR BERUFSLABOR | ATELIER 10 · SCHRAUBTRAINING</title><style>
 *{box-sizing:border-box}body{margin:0;overflow:hidden;background:#10191f;color:#ecf0f2;font:14px system-ui,Arial}#ui{position:fixed;z-index:10;top:16px;left:16px;pointer-events:none;max-width:410px}#panel{padding:16px 20px;background:#10202bdc;border:1px solid #ffffff38;border-radius:14px;backdrop-filter:blur(12px)}h1{font-size:19px;margin:0 0 6px;letter-spacing:.09em}p{margin:8px 0;line-height:1.5;color:#cbd7df}#task{color:#f9d68a;font-weight:700}#feedback{color:#a9e6b8}#guide{position:fixed;left:16px;bottom:18px;z-index:9;background:#10202be5;border-radius:10px;padding:13px 17px;max-width:510px;font-size:12px;line-height:1.65}#vr{position:fixed;bottom:18px;right:18px;z-index:20;pointer-events:auto}button{background:#ffd277;color:#17202b;border:0;border-radius:9px;padding:12px 19px;font-weight:800;cursor:pointer}button:disabled{opacity:.45}#msg{position:fixed;top:16px;right:16px;max-width:270px;z-index:11;font-size:12px;color:#ffe0b4;background:#1d2935dd;padding:12px;border-radius:10px}#splash{position:fixed;inset:0;z-index:13;background:#0c1925e9;display:flex;align-items:center;justify-content:center;padding:25px}#splash>div{background:#182d3b;border:1px solid #ffffff35;padding:28px;border-radius:20px;max-width:520px}#splash h2{font-size:24px;margin:0 0 8px}#splash button{margin-top:10px}#reticle{position:fixed;left:50%;top:50%;width:7px;height:7px;background:white;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}body.in-vr #ui,body.in-vr #guide,body.in-vr #reticle,body.in-vr #splash,body.in-vr #msg,body.in-vr #cartControl{display:none}@media(max-width:650px){#panel{padding:10px}h1{font-size:14px}#guide{font-size:11px;max-width:75%}}
-</style></head><body><div id="ui"><div id="panel"><h1>ATELIER 09 / POWER GRIP</h1><p>Quest 3 / 3S · GLB-Werkzeugwagen · VR-Trainingshalle</p><p id="task">Aufgabe: Greife den orange markierten Schraubenschlüssel.</p><p id="feedback">Lernfortschritt: 0 / 3</p></div></div><div id="msg">3D-Engine lädt …</div><div id="guide"><b>Quest:</b> linker Stick = laufen · rechter Stick = 30° drehen · Grip = Werkzeug greifen · Ohne Controller: echte Handmodelle und Faustgriff · rechter Trigger = teleportieren.<br><b>Desktop:</b> Klicken zum Starten · WASD laufen · Maus umsehen · Linksklick Objekt aufnehmen/ablegen · T teleportieren · Q/E drehen · ESC Maus frei</div><div id="reticle"></div><div id="splash"><div><h2>Willkommen im VR-Berufslabor</h2><p>Eine ganze begehbare 3D-Werkstatt mit einem separat geladenen GLB-Werkzeugwagen, Fahrzeug und zwei greifbaren Werkzeugen. Dies ist ein VR-Prototyp, keine fotorealistische Trainingssimulation.</p><p>Für die Quest im Browser eine <b>HTTPS-Adresse</b> öffnen und anschließend <b>VR starten</b> wählen. Auf dem Desktop kannst du den Ablauf vorher testen.</p><button id="enter">Desktop-Demo starten</button><p style="font-size:12px">Für VR: Desktop-Demo starten antippen, dann den ENTER-VR-Button unten rechts wählen.</p></div></div><div id="vr"></div>
+</style></head><body><div id="ui"><div id="panel"><h1>ATELIER 11 / TRELLIS-WERKZEUGE</h1><p>Quest 3 / 3S · Trellis-GLB-Werkzeuge · VR-Trainingshalle</p><p id="task">Aufgabe: Akkuschrauber greifen, zur Schraubstation führen und Schraube eindrehen.</p><p id="feedback">Schraubfortschritt: 0 %</p></div></div><div id="msg">3D-Engine lädt …</div><div id="guide"><b>Quest:</b> linker Stick = laufen · rechter Stick = 30° drehen · Grip = Werkzeug greifen · Ohne Controller: echte Handmodelle und Faustgriff · rechter Trigger = bohren, wenn Schrauber gehalten wird; sonst teleportieren.<br><b>Desktop:</b> Klicken zum Starten · WASD laufen · Maus umsehen · Linksklick Objekt aufnehmen/ablegen · B bohren (halten) · R Schraube zurücksetzen · T teleportieren · Q/E drehen · ESC Maus frei</div><div id="reticle"></div><div id="splash"><div><h2>Willkommen im VR-Berufslabor</h2><p>Eine begehbare Werkstatt mit drei TRELLIS-GLB-Werkzeugen, GLB-Werkzeugwagen, Fahrzeug, Werkzeug-Greifankern und einer funktionalen Schraubstation. Dies ist ein VR-Prototyp, keine fotorealistische Trainingssimulation.</p><p>Für die Quest im Browser eine <b>HTTPS-Adresse</b> öffnen und anschließend <b>VR starten</b> wählen. Auf dem Desktop kannst du den Ablauf vorher testen.</p><button id="enter">Desktop-Demo starten</button><p style="font-size:12px">Für VR: Desktop-Demo starten antippen, dann den ENTER-VR-Button unten rechts wählen.</p></div></div><div id="vr"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script><script type="module">
 import * as THREE from 'three';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
@@ -89,8 +89,110 @@ box(4.6,.17,1.5,wood,-1,1,-2.5);for(const x of [-3.1,1.1])for(const z of [-3.13,
 textSign('WERKZEUGSTATION / 01',-1,2.8,-9.29,5);textSign('SICHERHEIT ZUERST',5.4,2.3,-9.29,3.2);
 for(let j=0;j<2;j++){const x=4.6+j*1.5;box(1.3,.12,1.5,steel,x,.86,-2.5);for(const xx of [-.55,.55])for(const zz of [-.55,.55])box(.07,.8,.07,dark,x+xx,.42,-2.5+zz)}
 // interactive tools as detailed geometries, not game-engine placeholders; only car uses external GLB.
-const grabbables=[];function tool(name,x,y,z,kind){const root=new THREE.Group();root.position.set(x,y,z);scene.add(root);if(kind==='wrench'){const stem=box(.055,.04,.48,steel,0,.02,0,root);const ring=add(new THREE.TorusGeometry(.102,.038,10,24),steel,0,.02,-.3,root);ring.rotation.x=Math.PI/2;const jaw=add(new THREE.TorusGeometry(.088,.027,8,18,Math.PI*1.55),steel,0,.02,.26,root);jaw.rotation.x=Math.PI/2}else{box(.11,.085,.2,orange,0,.03,.08,root);box(.07,.20,.105,black,0,-.1,.08,root);beam([0,.03,.15],[0,.03,-.28],.037,steel,root);cyl(.07,.08,steel,0,.03,-.3,root).rotation.x=Math.PI/2}root.userData={name,kind,heldBy:null,home:new THREE.Vector3(x,y,z),snapped:false};grabbables.push(root);return root}
-const wrench=tool('Schraubenschlüssel',-2.0,1.16,-2.4,'wrench'),driver=tool('Akkuschrauber',-.65,1.19,-2.45,'driver');wrench.rotation.y=.7;driver.rotation.y=-.5;
+const grabbables=[];function tool(name,x,y,z,kind){const root=new THREE.Group();root.position.set(x,y,z);scene.add(root);if(kind==='wrench'){const stem=box(.055,.04,.48,steel,0,.02,0,root);const ring=add(new THREE.TorusGeometry(.102,.038,10,24),steel,0,.02,-.3,root);ring.rotation.x=Math.PI/2;const jaw=add(new THREE.TorusGeometry(.088,.027,8,18,Math.PI*1.55),steel,0,.02,.26,root);jaw.rotation.x=Math.PI/2}else{box(.11,.085,.2,orange,0,.03,.08,root);box(.07,.20,.105,black,0,-.1,.08,root);beam([0,.03,.15],[0,.03,-.28],.037,steel,root);cyl(.07,.08,steel,0,.03,-.3,root).rotation.x=Math.PI/2}root.userData={name,kind,heldBy:null,home:new THREE.Vector3(x,y,z),snapped:false,gripOffset:kind==='driver'?new THREE.Vector3(0,-.075,.07):new THREE.Vector3(0,.015,0),gripEuler:kind==='driver'?new THREE.Euler(-.15,0,0):new THREE.Euler(0,0,Math.PI/2)};grabbables.push(root);return root}
+const wrench=tool('Schraubenschlüssel',-2.0,1.16,-2.4,'wrench'),driver=tool('Akkuschrauber',-.65,1.19,-2.45,'driver');
+wrench.rotation.y=.7;driver.rotation.y=-.5;
+const hammer=tool('Hammer',-1.45,1.19,-2.42,'hammer');
+hammer.userData.gripOffset.set(-.06,0,0);
+hammer.userData.gripEuler.set(0,0,Math.PI/2);
+// Names and dimensions from the three uploaded TRELLIS GLBs. The original
+// mesh axes vary between assets; local transforms are intentionally independent
+// of the actual hand grip calibration.
+const assetLoader = new GLTFLoader();
+const assetSpecs = [
+ {root:driver,url:'./assets/akkuschrauber.glb',kind:'driver'},
+ {root:wrench,url:'./assets/schraubenschluessel.glb',kind:'wrench'},
+ {root:hammer,url:'./assets/hammer.glb',kind:'hammer'}
+];
+for(const spec of assetSpecs){
+ const fallback = [...spec.root.children];
+ assetLoader.load(spec.url,g=>{
+  const visual = new THREE.Group(); visual.name='Trellis_'+spec.kind;
+  const mesh=g.scene;
+  // GLB is already dimensioned in meters; normalize around its own bounds,
+  // never auto-scale to an arbitrary game-sized cube.
+  mesh.updateWorldMatrix(true,true);
+  let bounds = new THREE.Box3().setFromObject(mesh);
+  const sz=bounds.getSize(new THREE.Vector3());
+  const center=bounds.getCenter(new THREE.Vector3());
+  mesh.position.sub(center);
+  if(spec.kind==='driver'){
+   // Trellis drill long axis was vertical (+Y), rotate it onto the
+   // local drill axis (-Z) so that the nozzle and screw-training agree.
+   visual.rotation.x=-Math.PI/2;
+   visual.position.set(0,.005,-.09);
+  }else if(spec.kind==='wrench'){
+   visual.rotation.y=Math.PI/2;
+  }else{
+   visual.rotation.y=Math.PI/2;
+  }
+  mesh.traverse(n=>{if(n.isMesh){n.castShadow=true;n.receiveShadow=true;n.frustumCulled=false;}});
+  visual.add(mesh);spec.root.add(visual);
+  // Remove only the primitive mesh placeholder. Keep functional nodes
+  // (drillChuck, trigger) for the actual screw and motor logic.
+  for(const node of fallback){
+   if(spec.kind==='driver'){
+    // the drill chuck is instantiated after this request started;
+    // asynchronously loaded callback sees it as a different child.
+    if(node===drillChucks||node===trigger||node===motorLight)continue;
+   }
+   spec.root.remove(node);
+  }
+  // Hide the three crude cylinders of the old chuck, but preserve the
+  // functional tip/axis object for motor rotation and screw detection.
+  if(spec.kind==='driver'){
+    // Keep a visible socket tip as visual training aid.
+    notice('TRELLIS-Akkuschrauber geladen · Schraubstation bereit');
+  }
+  console.info('Loaded Trellis',spec.kind,sz.toArray());
+ },undefined,err=>{
+  console.warn('Trellis asset unavailable:',spec.url,err);
+  notice('Trellis-Asset fehlt: '+spec.url+' – Platzhalter wird angezeigt');
+ });
+}
+
+// Werkzeug-Eigenschaften: separat definierter Griffanker und rotierendes Bohrfutter.
+const drillChucks = new THREE.Group();driver.add(drillChucks);drillChucks.position.set(0,.03,-.31);
+const drillSteel=m('#c8d3d8',.28,.78),drillRubber=m('#22282e',.87,.03);
+for(let k=0;k<3;k++){const sleeve=cyl(.049,.055, k%2?drillRubber:drillSteel,0,0,-.025-k*.044,drillChucks);sleeve.rotation.x=Math.PI/2;}
+const drillBit=cyl(.012,.20,drillSteel,0,0,-.185,drillChucks);drillBit.rotation.x=Math.PI/2;
+box(.085,.045,.095,drillRubber,0,-.14,.1,driver); // Akkugehäuse
+const trigger=box(.047,.034,.034,red,0,-.065,-.018,driver);
+// Schraubstation: senkrechte Arbeitsplatte, die Schraube ist entlang +Z zugänglich.
+const stationRoot=new THREE.Group();stationRoot.position.set(-.65,1.51,-3.15);scene.add(stationRoot);
+box(.74,.68,.10,wood,0,0,0,stationRoot);
+for(let xx of [-.31,.31])for(let yy of [-.26,.26]){const pin=cyl(.016,.036,steel,xx,yy,.057,stationRoot);pin.rotation.x=Math.PI/2;}
+const screwGroup=new THREE.Group();screwGroup.position.set(0,0,.075);stationRoot.add(screwGroup);
+const screwBody=cyl(.038,.20,steel,0,0,.10,screwGroup);screwBody.rotation.x=Math.PI/2;
+const screwHead=cyl(.073,.035,drillSteel,0,0,.018,screwGroup);screwHead.rotation.x=Math.PI/2;
+const screwSlot=box(.09,.008,.012,dark,0,0,.040,screwGroup);
+const aimRing=add(new THREE.TorusGeometry(.12,.008,8,32),green,0,0,.095,stationRoot);aimRing.visible=false;
+const motorLight=add(new THREE.SphereGeometry(.018,12,8),new THREE.MeshBasicMaterial({color:'#ff9b41'}),0,.072,-.08,driver);
+let screwDepth=0,motorOn=false, motorOwner=null, drillDirection=1, drillSeconds=0;
+let audioCtx=null,audioOsc=null,audioGain=null;
+function startDrillAudio(){try{audioCtx ||=new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume();if(audioOsc)return;audioOsc=audioCtx.createOscillator();audioGain=audioCtx.createGain();audioOsc.type='sawtooth';audioOsc.frequency.value=116;audioGain.gain.value=.025;audioOsc.connect(audioGain);audioGain.connect(audioCtx.destination);audioOsc.start();}catch(e){console.warn('Audio nicht verfügbar',e)}}
+function stopDrillAudio(){if(!audioOsc)return;try{audioOsc.stop();audioOsc.disconnect();audioGain.disconnect()}catch(e){}audioOsc=null;audioGain=null}
+function motor(active,who=null){if(active && driver.userData.heldBy==null)return;motorOn=!!active;motorOwner=active?who:null;motorLight.material.color.set(motorOn?'#79f7a6':'#ff9b41');if(motorOn)startDrillAudio();else stopDrillAudio()}
+function drillTip(){return drillChucks.localToWorld(new THREE.Vector3(0,0,-.30))}
+function workTick(dt){
+ if(motorOn && driver.userData.heldBy==null)motor(false);
+ if(motorOn)drillChucks.rotation.z+=dt*37;
+ const tip=drillTip(),target=screwGroup.localToWorld(new THREE.Vector3(0,0,.065));
+ const forward=new THREE.Vector3(0,0,-1).transformDirection(driver.matrixWorld);
+ const aligned=forward.dot(new THREE.Vector3(0,0,-1))>.82;
+ const near=tip.distanceTo(target)<.25;
+ aimRing.visible=near;
+ aimRing.material.color.set(aligned?'#60e9aa':'#ffa746');
+ if(motorOn){
+  if(near&&aligned){screwDepth=Math.max(0,Math.min(1,screwDepth+dt*.33*drillDirection));drillSeconds+=dt;screwGroup.position.z=.075-screwDepth*.16;screwGroup.rotation.z+=dt*12*drillDirection;
+   if(audioOsc)audioOsc.frequency.setTargetAtTime(94+40*(1-screwDepth),audioCtx.currentTime,.06);
+   if(screwDepth>=1){motor(false);notice('Schraube eingesetzt! Aufgabe abgeschlossen. Drücke R zum Zurücksetzen.');}
+  }else if(drillSeconds===0){/* Motor dreht frei – kein Fortschritt ohne Kontakt */}
+ }
+ if(feedback)feedback.textContent='Schraubfortschritt: '+Math.round(screwDepth*100)+' % · '+(motorOn?'Motor an':'Motor aus')+' · '+(near?(aligned?'Ausrichtung passt':'Bohrer ausrichten'):'Bohrer an Schraubkopf führen');
+}
+function resetScrew(){screwDepth=0;drillSeconds=0;screwGroup.position.z=.075;screwGroup.rotation.z=0;notice('Neue Übung: Schraube eindrehen')}
+
 // Two target sockets, color matching only after release.
 const sockets=[];for(const [i,x] of [[0,4.6],[1,6.1]]){const g=new THREE.Group();g.position.set(x,.97,-2.5);scene.add(g);const ring=add(new THREE.TorusGeometry(.22,.032,10,28),i===0?orange:green,0,.04,0,g);ring.rotation.x=Math.PI/2;box(.52,.02,.52,m('#2e393b',.9),0,-.035,0,g);sockets.push(g)}
 const infoPositions=[new THREE.Vector3(-1,1.2,-2.5),new THREE.Vector3(5.4,1.4,-2.5)];
@@ -102,10 +204,26 @@ const carAnchor=new THREE.Group();carAnchor.position.set(-5,0,2.7);scene.add(car
 let completed=new Set(),pickCount=0;const task=document.querySelector('#task'),feedback=document.querySelector('#feedback'),msg=document.querySelector('#msg');function notice(t){msg.textContent=t;statusText(t)}
 const hudCanvas=document.createElement('canvas');hudCanvas.width=1024;hudCanvas.height=256;const hx=hudCanvas.getContext('2d');const hudTexture=new THREE.CanvasTexture(hudCanvas);hudTexture.colorSpace=THREE.SRGBColorSpace;const hudMesh=add(new THREE.PlaneGeometry(2.9,.72),new THREE.MeshBasicMaterial({map:hudTexture,transparent:true,side:THREE.DoubleSide}),-1,3.25,-3.23);hudMesh.castShadow=false;
 function statusText(str){hx.clearRect(0,0,1024,256);hx.fillStyle='#152b36';hx.fillRect(0,0,1024,256);hx.strokeStyle='#efb759';hx.lineWidth=9;hx.strokeRect(4,4,1016,248);hx.fillStyle='#f4e5c5';hx.font='bold 49px Arial';hx.textAlign='center';const words=str.split(' ');let lines=[''];for(let w of words){let n=lines[lines.length-1]+' '+w;if(hx.measureText(n).width>920)lines.push(w);else lines[lines.length-1]=n}lines.slice(0,3).forEach((line,i)=>hx.fillText(line,512,95+i*62));hudTexture.needsUpdate=true}
-function refresh(){let n=completed.size;feedback.textContent=`Erledigt: ${n} / 2 Werkzeuge · Aufnahmen: ${pickCount}`;task.textContent=n===2?'Erfolgreich! Beide Werkzeuge sortiert.':`Aufgabe: ${n===0?'Nimm ein Werkzeug mit Controller-Grip oder geschlossener Hand auf und lege es in die passende Ablage.':'Lege auch das zweite Werkzeug in seine Ablage.'}`;statusText(n===2?'BESTANDEN · BEIDE WERKZEUGE':'Werkzeuge einsortieren: '+n+' / 2')};refresh();
+function refresh(){task.textContent='Aufgabe: Akkuschrauber aufnehmen, Bohrfutter ausrichten und Schraube eindrehen.';statusText('AKKUSCHRAUBER · Schraubstation an der Werkbank')};refresh();
 function worldPosition(o){return o.getWorldPosition(new THREE.Vector3())}function nearestTool(pos,maxDist=.42){let best=null,dist=maxDist;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;let d=worldPosition(o).distanceTo(pos);if(d<dist){best=o;dist=d}}return best}
-function take(o,parent,index){if(!o)return false;o.userData.heldBy=index;parent.attach(o);o.position.set(0,-.015,-.13);o.rotation.set(0,0,0);pickCount++;refresh();notice('Aufgenommen: '+o.userData.name);return true}
-function release(o){if(!o)return;scene.attach(o);o.userData.heldBy=null;let slot=o.userData.kind==='wrench'?sockets[0]:sockets[1];let dist=worldPosition(o).distanceTo(worldPosition(slot));if(dist<.56){o.userData.snapped=true;slot.attach(o);o.position.set(0,.13,0);o.rotation.set(0,0,0);completed.add(o.userData.kind);notice('Richtig abgelegt: '+o.userData.name);refresh()}else{const p=o.position;o.position.y=Math.max(1.10,p.y);if(p.y>1.6||p.x<-4||p.x>8||p.z<-8||p.z>7){o.position.copy(o.userData.home)}else{o.position.y=1.17}notice('Werkzeug abgelegt. Bringe es zur markierten Ablage.')}}
+function take(o,parent,index){
+ if(!o || o.userData.heldBy!=null)return false;
+ o.userData.heldBy=index;parent.attach(o);
+ // Kalibrierter Werkzeuggriff statt eines universellen Objekt-Versatzes.
+ o.quaternion.setFromEuler(o.userData.gripEuler);
+ const localGrip=o.userData.gripOffset.clone().applyQuaternion(o.quaternion);
+ o.position.copy(localGrip.multiplyScalar(-1));
+ pickCount++;refresh();notice('Gegriffen: '+o.userData.name);return true;
+}
+function release(o){
+ if(!o)return;
+ if(o===driver)motor(false);
+ scene.attach(o);o.userData.heldBy=null;
+ let slot=o.userData.kind==='wrench'?sockets[0]:(o.userData.kind==='driver'?sockets[1]:null);
+ if(slot && worldPosition(o).distanceTo(worldPosition(slot))<.48){o.userData.snapped=true;slot.attach(o);o.position.set(0,.13,0);o.rotation.set(0,0,0);completed.add(o.userData.kind);notice('Werkzeug abgelegt: '+o.userData.name)}
+ else{if(o.position.y>1.8||o.position.x<-8||o.position.x>8||o.position.z<-9||o.position.z>9)o.position.copy(o.userData.home);else o.position.y=1.2;notice('Werkzeug losgelassen')}
+ refresh();
+}
 // Standard hand meshes contributed by Meta to WebXR Input Profiles.
 // With tracked Touch controllers, WebXR has controller poses and grip buttons,
 // not a fully tracked finger skeleton. Show profile-matched controller models
@@ -122,8 +240,8 @@ for(let i=0;i<2;i++){
   ray.userData.index=i;
   ray.addEventListener('squeezestart',()=>{if(held[i])return;const obj=nearestTool(worldPosition(grip),.40);if(obj&&take(obj,grip,i))held[i]=obj});
   ray.addEventListener('squeezeend',()=>{if(held[i]){release(held[i]);held[i]=null}});
-  ray.addEventListener('selectstart',()=>{if(i===1){const target=projectTeleport(ray);if(target)teleport(target)}else if(!held[i]){const obj=nearestTool(worldPosition(grip),.35);if(obj&&take(obj,grip,i))held[i]=obj}});
-  ray.addEventListener('selectend',()=>{if(i===0&&held[i]){release(held[i]);held[i]=null}});
+  ray.addEventListener('selectstart',()=>{if(held[i]===driver){motor(true,i);return;}if(i===1){const target=projectTeleport(ray);if(target)teleport(target)}else if(!held[i]){const obj=nearestTool(worldPosition(grip),.35);if(obj&&take(obj,grip,i))held[i]=obj}});
+  ray.addEventListener('selectend',()=>{if(motorOwner===i)motor(false)});
   const trackedHand=renderer.xr.getHand(i);
   trackedHand.add(handFactory.createHandModel(trackedHand,'mesh'));
   rig.add(trackedHand);trackedHands.push(trackedHand);
@@ -159,6 +277,7 @@ function updateHandPowerGrips(){
     }
     if(valid<3){state.closedFrames=state.openFrames=0;continue;}
     const isFist=closed>=3, isOpen=open>=3;
+    if(held[i]===driver){const thumb=j['thumb-tip'],idx=j['index-finger-tip'];if(thumb&&idx&&thumb.visible&&idx.visible){const pinch=worldPosition(thumb).distanceTo(worldPosition(idx))<.033; if(pinch&&!motorOn)motor(true,'hand'+i);else if(!pinch&&motorOwner==='hand'+i)motor(false);}}
     state.closedFrames=isFist?state.closedFrames+1:0;
     state.openFrames=isOpen?state.openFrames+1:0;
     if(!held[i]&&state.closedFrames>=4){
@@ -216,7 +335,7 @@ function updateSticks(dt){
   }
  }
 }
-renderer.xr.addEventListener('sessionstart',()=>{document.body.classList.add('in-vr');document.getElementById('splash').style.display='none';notice('VR aktiv · Controller: Grip greifen | Handtracking: Hand um Werkzeug schließen')});renderer.xr.addEventListener('sessionend',()=>{document.body.classList.remove('in-vr');notice('VR beendet')});
+renderer.xr.addEventListener('sessionstart',()=>{document.body.classList.add('in-vr');document.getElementById('splash').style.display='none';notice('VR aktiv · Controller: Grip greifen | Handtracking: Hand um Werkzeug schließen')});renderer.xr.addEventListener('sessionend',()=>{document.body.classList.remove('in-vr');motor(false);notice('VR beendet')});
 
 // Real glTF tool cart. Deliberately uses a well-lit, non-black material fallback.
 // Black-on-black appearance was reported on Quest and desktop with the old metallic setup.
@@ -252,9 +371,11 @@ function cartTick(dt){cartDrawers.forEach((d,i)=>{if(!d)return;cartTravel[i]=THR
 for(let i=0;i<2;i++){const ctrl=renderer.xr.getController(i);ctrl.addEventListener('selectstart',()=>{if(!renderer.xr.isPresenting)return;const origin=ctrl.getWorldPosition(new THREE.Vector3()),q=ctrl.getWorldQuaternion(new THREE.Quaternion());cartRay.ray.origin.copy(origin);cartRay.ray.direction.set(0,0,-1).applyQuaternion(q);cartSelect(cartRay)})}
 
 // Desktop test mode, similar task logic with pointer lock and camera-relative pickup.
-const keys={};let yaw=0,pitch=0,locked=false,desktopHeld=null;document.getElementById('enter').onclick=()=>{document.getElementById('splash').style.display='none';renderer.domElement.requestPointerLock?.()};document.addEventListener('pointerlockchange',()=>locked=document.pointerLockElement===renderer.domElement);document.addEventListener('mousemove',e=>{if(locked&&!renderer.xr.isPresenting){yaw-=e.movementX*.0022;pitch=THREE.MathUtils.clamp(pitch-e.movementY*.0022,-1.4,1.4)}});document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='KeyQ')snapTurn(1);if(e.code==='KeyE')snapTurn(-1);if(e.code==='KeyT'&&!renderer.xr.isPresenting){const dest=projectTeleport(camera);if(dest)teleport(dest)}});document.addEventListener('keyup',e=>keys[e.code]=false);
+const keys={};let yaw=0,pitch=0,locked=false,desktopHeld=null;document.getElementById('enter').onclick=()=>{document.getElementById('splash').style.display='none';renderer.domElement.requestPointerLock?.()};document.addEventListener('pointerlockchange',()=>locked=document.pointerLockElement===renderer.domElement);document.addEventListener('mousemove',e=>{if(locked&&!renderer.xr.isPresenting){yaw-=e.movementX*.0022;pitch=THREE.MathUtils.clamp(pitch-e.movementY*.0022,-1.4,1.4)}});document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='KeyB'&&desktopHeld===driver)motor(true,'desktop');if(e.code==='KeyR')resetScrew();if(e.code==='KeyQ')snapTurn(1);if(e.code==='KeyE')snapTurn(-1);if(e.code==='KeyT'&&!renderer.xr.isPresenting){const dest=projectTeleport(camera);if(dest)teleport(dest)}});document.addEventListener('keyup',e=>{keys[e.code]=false;if(e.code==='KeyB'&&motorOwner==='desktop')motor(false)});
 renderer.domElement.addEventListener('click',()=>{if(renderer.xr.isPresenting)return;if(!locked){renderer.domElement.requestPointerLock?.();return}if(desktopHeld){release(desktopHeld);desktopHeld=null;return}const center=camera.getWorldPosition(new THREE.Vector3());const forward=new THREE.Vector3(0,0,-1).applyQuaternion(camera.getWorldQuaternion(new THREE.Quaternion()));let candidate=null,best=2.4;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;const delta=worldPosition(o).sub(center);const depth=delta.dot(forward);const deviation=delta.clone().addScaledVector(forward,-depth).length();if(depth>0&&depth<2.5&&deviation<.42&&depth<best){candidate=o;best=depth}}if(candidate){take(candidate,camera,'desktop');candidate.position.set(.23,-.22,-.64);desktopHeld=candidate}});
-let last=performance.now();renderer.setAnimationLoop(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.06);last=now;if(!renderer.xr.isPresenting){camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);const f=Number(!!keys.KeyW)-Number(!!keys.KeyS),r=Number(!!keys.KeyD)-Number(!!keys.KeyA);const dir=new THREE.Vector3(-Math.sin(yaw)*f+Math.cos(yaw)*r,0,-Math.cos(yaw)*f-Math.sin(yaw)*r);if(dir.lengthSq()){dir.normalize().multiplyScalar(dt*(keys.ShiftLeft?4:2.1));const next=rig.position.clone().add(dir);if(validFloor(next))rig.position.copy(next)}}else{updateSticks(dt);updateTeleportVisual();updateHandPowerGrips()}cartTick(dt);renderer.render(scene,camera)});
+let last=performance.now();renderer.setAnimationLoop(()=>{const now=performance.now(),dt=Math.min((now-last)/1000,.06);last=now;if(!renderer.xr.isPresenting){camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);const f=Number(!!keys.KeyW)-Number(!!keys.KeyS),r=Number(!!keys.KeyD)-Number(!!keys.KeyA);const dir=new THREE.Vector3(-Math.sin(yaw)*f+Math.cos(yaw)*r,0,-Math.cos(yaw)*f-Math.sin(yaw)*r);if(dir.lengthSq()){dir.normalize().multiplyScalar(dt*(keys.ShiftLeft?4:2.1));const next=rig.position.clone().add(dir);if(validFloor(next))rig.position.copy(next)}}else{updateSticks(dt);updateTeleportVisual();updateHandPowerGrips()}cartTick(dt);workTick(dt);renderer.render(scene,camera)});
+// Stop audio upon session ending or backgrounding.
+document.addEventListener('visibilitychange',()=>{if(document.hidden)motor(false)});
 const btn=VRButton.createButton(renderer, { optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking'] });document.getElementById('vr').appendChild(btn);btn.style.position='static';btn.style.margin='0';
 if(!window.isSecureContext){msg.textContent='Hinweis: Quest VR benötigt HTTPS (oder localhost).'}else if(!navigator.xr){msg.textContent='WebXR nicht vorhanden. Desktop-Demo ist nutzbar.'}else navigator.xr.isSessionSupported('immersive-vr').then(ok=>notice(ok?'WebXR verfügbar · Quest-VR starten':'Immersive VR hier nicht unterstützt. Desktop-Test möglich.')).catch(()=>{});
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
