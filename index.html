@@ -102,7 +102,7 @@ const carAnchor=new THREE.Group();carAnchor.position.set(-5,0,2.7);scene.add(car
 let completed=new Set(),pickCount=0;const task=document.querySelector('#task'),feedback=document.querySelector('#feedback'),msg=document.querySelector('#msg');function notice(t){msg.textContent=t;statusText(t)}
 const hudCanvas=document.createElement('canvas');hudCanvas.width=1024;hudCanvas.height=256;const hx=hudCanvas.getContext('2d');const hudTexture=new THREE.CanvasTexture(hudCanvas);hudTexture.colorSpace=THREE.SRGBColorSpace;const hudMesh=add(new THREE.PlaneGeometry(2.9,.72),new THREE.MeshBasicMaterial({map:hudTexture,transparent:true,side:THREE.DoubleSide}),-1,3.25,-3.23);hudMesh.castShadow=false;
 function statusText(str){hx.clearRect(0,0,1024,256);hx.fillStyle='#152b36';hx.fillRect(0,0,1024,256);hx.strokeStyle='#efb759';hx.lineWidth=9;hx.strokeRect(4,4,1016,248);hx.fillStyle='#f4e5c5';hx.font='bold 49px Arial';hx.textAlign='center';const words=str.split(' ');let lines=[''];for(let w of words){let n=lines[lines.length-1]+' '+w;if(hx.measureText(n).width>920)lines.push(w);else lines[lines.length-1]=n}lines.slice(0,3).forEach((line,i)=>hx.fillText(line,512,95+i*62));hudTexture.needsUpdate=true}
-function refresh(){let n=completed.size;feedback.textContent=`Erledigt: ${n} / 2 Werkzeuge · Aufnahmen: ${pickCount}`;task.textContent=n===2?'Erfolgreich! Beide Werkzeuge sortiert.':`Aufgabe: ${n===0?'Nimm ein Werkzeug mit der Grip-Taste auf und lege es in die passende Ablage.':'Lege auch das zweite Werkzeug in seine Ablage.'}`;statusText(n===2?'BESTANDEN · BEIDE WERKZEUGE':'Werkzeuge einsortieren: '+n+' / 2')};refresh();
+function refresh(){let n=completed.size;feedback.textContent=`Erledigt: ${n} / 2 Werkzeuge · Aufnahmen: ${pickCount}`;task.textContent=n===2?'Erfolgreich! Beide Werkzeuge sortiert.':`Aufgabe: ${n===0?'Nimm ein Werkzeug mit Controller-Grip oder Hand-Pinch auf und lege es in die passende Ablage.':'Lege auch das zweite Werkzeug in seine Ablage.'}`;statusText(n===2?'BESTANDEN · BEIDE WERKZEUGE':'Werkzeuge einsortieren: '+n+' / 2')};refresh();
 function worldPosition(o){return o.getWorldPosition(new THREE.Vector3())}function nearestTool(pos,maxDist=.42){let best=null,dist=maxDist;for(const o of grabbables){if(o.userData.snapped||o.userData.heldBy)continue;let d=worldPosition(o).distanceTo(pos);if(d<dist){best=o;dist=d}}return best}
 function take(o,parent,index){if(!o)return false;o.userData.heldBy=index;parent.attach(o);o.position.set(0,-.015,-.13);o.rotation.set(0,0,0);pickCount++;refresh();notice('Aufgenommen: '+o.userData.name);return true}
 function release(o){if(!o)return;scene.attach(o);o.userData.heldBy=null;let slot=o.userData.kind==='wrench'?sockets[0]:sockets[1];let dist=worldPosition(o).distanceTo(worldPosition(slot));if(dist<.56){o.userData.snapped=true;slot.attach(o);o.position.set(0,.13,0);o.rotation.set(0,0,0);completed.add(o.userData.kind);notice('Richtig abgelegt: '+o.userData.name);refresh()}else{const p=o.position;o.position.y=Math.max(1.10,p.y);if(p.y>1.6||p.x<-4||p.x>8||p.z<-8||p.z>7){o.position.copy(o.userData.home)}else{o.position.y=1.17}notice('Werkzeug abgelegt. Bringe es zur markierten Ablage.')}}
@@ -127,13 +127,25 @@ for(let i=0;i<2;i++){
   const trackedHand=renderer.xr.getHand(i);
   trackedHand.add(handFactory.createHandModel(trackedHand,'mesh'));
   rig.add(trackedHand);trackedHands.push(trackedHand);
-  trackedHand.addEventListener('pinchstart',()=>{
+  // Hand tracking: use actual finger tips, never wrist for proximity.
+  // Pinch starts with thumb + index touching. Grip is anchored to index tip.
+  function pinchGrab(){
     if(held[i])return;
-    const wrist=trackedHand.joints && (trackedHand.joints['wrist'] || trackedHand.joints['index-finger-tip']);
-    if(!wrist)return;
-    const obj=nearestTool(worldPosition(wrist),.24);
-    if(obj&&take(obj,wrist,i))held[i]=obj;
-  });
+    const joints=trackedHand.joints || {};
+    const index=joints['index-finger-tip'],thumb=joints['thumb-tip'];
+    if(!index || !thumb)return;
+    trackedHand.updateWorldMatrix(true,true);
+    const a=worldPosition(index),b=worldPosition(thumb);
+    const pinchCenter=a.clone().add(b).multiplyScalar(.5);
+    const obj=nearestTool(pinchCenter,.34);
+    if(obj && take(obj,index,i)){
+      held[i]=obj;
+      notice('Pinch: '+obj.userData.name+' gegriffen');
+    }else{
+      notice('Kein Werkzeug direkt an den Fingerspitzen. Gehe näher an die Werkbank.');
+    }
+  }
+  trackedHand.addEventListener('pinchstart',pinchGrab);
   trackedHand.addEventListener('pinchend',()=>{if(held[i]){release(held[i]);held[i]=null}});
 }
 // Teleport to walkable floors; distance limited and central station excluded.
@@ -178,7 +190,7 @@ function updateSticks(dt){
   }
  }
 }
-renderer.xr.addEventListener('sessionstart',()=>{document.body.classList.add('in-vr');document.getElementById('splash').style.display='none';notice('VR aktiv · linker Stick laufen · Grip greifen')});renderer.xr.addEventListener('sessionend',()=>{document.body.classList.remove('in-vr');notice('VR beendet')});
+renderer.xr.addEventListener('sessionstart',()=>{document.body.classList.add('in-vr');document.getElementById('splash').style.display='none';notice('VR aktiv · Controller: Grip greifen | Handtracking: Pinch an Werkzeug')});renderer.xr.addEventListener('sessionend',()=>{document.body.classList.remove('in-vr');notice('VR beendet')});
 
 // Real glTF tool cart. Deliberately uses a well-lit, non-black material fallback.
 // Black-on-black appearance was reported on Quest and desktop with the old metallic setup.
