@@ -1,39 +1,93 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BERUFSLABOR — Werkzeugwagen GLB</title><style>
-:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:#0c141d;color:#e8eef2;overflow:hidden}canvas{display:block}.hud{position:absolute;top:22px;left:26px;pointer-events:none}.eyebrow{font-size:11px;letter-spacing:3px;color:#f7a965;font-weight:800}.hud h1{font-size:clamp(26px,3vw,42px);font-weight:750;letter-spacing:-1.4px;margin:11px 0 5px}.hud p{color:#9eacb6;font-size:13px;max-width:390px;line-height:1.5}.panel{position:absolute;right:24px;top:24px;width:min(270px,calc(100vw - 45px));border:1px solid #3a4754a6;background:#101923e8;backdrop-filter:blur(20px);border-radius:18px;padding:18px;box-shadow:0 20px 60px #0005}.panel h2{font-size:15px;margin:0 0 4px}.panel p{font-size:12px;color:#a5b1bb;margin:0 0 12px}.drawers{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}button{cursor:pointer;border-radius:10px;border:1px solid #35424e;background:#1e2c37;color:#e6eaf0;padding:10px 7px;font:600 12px inherit;transition:.15s}button:hover{background:#33495b}button.active{background:#d98343;border-color:#f3a66d;color:#171b20}button.wide{width:100%;margin-top:10px;background:#a9552a;border-color:#d48849;font-weight:750}.panel small{display:block;color:#83939f;margin-top:13px;line-height:1.6}.bottom{position:absolute;bottom:19px;left:26px;color:#9faab4;font-size:12px}.status{position:absolute;bottom:20px;right:25px;font-size:12px;color:#f3b075;text-align:right}.pill{display:inline-block;border-radius:20px;padding:7px 11px;background:#23352f;border:1px solid #486755;color:#8fe0b6}.error{color:#ffa4a4;padding:14px;background:#3d2020;border-radius:10px;font-size:12px}#vr{margin-top:8px}.touchbar{display:none}@media(max-width:680px){.hud{top:12px;left:16px}.hud h1{font-size:25px;margin:6px 0}.hud p{max-width:190px;font-size:11px}.panel{top:auto;bottom:12px;right:12px;width:215px;padding:12px}.panel small{display:none}.bottom{bottom:25px;left:13px;font-size:10px;max-width:105px}.status{bottom:235px;right:13px}}
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BERUFSLABOR — Werkzeugwagen GLB v2</title><style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 18%, #3b4652 0%, #1e2934 38%, #0e151d 100%);color:#e8eef2;overflow:hidden}canvas{display:block}.hud{position:absolute;top:22px;left:26px;pointer-events:none}.eyebrow{font-size:11px;letter-spacing:3px;color:#f7a965;font-weight:800}.hud h1{font-size:clamp(26px,3vw,42px);font-weight:750;letter-spacing:-1.4px;margin:11px 0 5px}.hud p{color:#b4c1ca;font-size:13px;max-width:420px;line-height:1.5}.panel{position:absolute;right:24px;top:24px;width:min(280px,calc(100vw - 45px));border:1px solid #475564a6;background:#101923e8;backdrop-filter:blur(20px);border-radius:18px;padding:18px;box-shadow:0 20px 60px #0005}.panel h2{font-size:15px;margin:0 0 4px}.panel p{font-size:12px;color:#a5b1bb;margin:0 0 12px}.drawers{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}button{cursor:pointer;border-radius:10px;border:1px solid #3f4f5c;background:#213240;color:#e6eaf0;padding:10px 7px;font:600 12px inherit;transition:.15s}button:hover{background:#365067}button.active{background:#d98343;border-color:#f3a66d;color:#171b20}button.wide{width:100%;margin-top:10px;background:#a9552a;border-color:#d48849;font-weight:750}.panel small{display:block;color:#93a4b1;margin-top:13px;line-height:1.6}.bottom{position:absolute;bottom:19px;left:26px;color:#b1bcc6;font-size:12px}.status{position:absolute;bottom:20px;right:25px;font-size:12px;color:#f3b075;text-align:right}.pill{display:inline-block;border-radius:20px;padding:7px 11px;background:#23352f;border:1px solid #486755;color:#8fe0b6}.error{color:#ffa4a4;padding:14px;background:#3d2020;border-radius:10px;font-size:12px}#vr{margin-top:8px}@media(max-width:680px){.hud{top:12px;left:16px}.hud h1{font-size:25px;margin:6px 0}.hud p{max-width:190px;font-size:11px}.panel{top:auto;bottom:12px;right:12px;width:215px;padding:12px}.panel small{display:none}.bottom{bottom:25px;left:13px;font-size:10px;max-width:105px}.status{bottom:235px;right:13px}}
 </style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script></head><body>
-<div class="hud"><div class="eyebrow">VR BERUFSLABOR / ASSET STUDY 001</div><h1>Werkzeugwagen.</h1><p>Ein eigenständig modelliertes GLB-Asset mit sechs animierten Schubladen. Kein 2D-Render, kein Foto.</p></div>
+<div class="hud"><div class="eyebrow">VR BERUFSLABOR / ASSET STUDY 001B</div><h1>Werkzeugwagen.</h1><p>Überarbeitete Darstellung mit deutlich hellerem Material-Setup, besserem Studiolicht und klarer sichtbaren Schubladen. So kannst du die echte 3D-Geometrie besser beurteilen.</p></div>
 <div class="panel"><h2>Interaktionen</h2><p>Schublade anklicken oder direkt am 3D-Modell auswählen.</p><div class="drawers" id="drawers"></div><button class="wide" id="toggleAll">Alle öffnen</button><div id="vr"></div><small>Linksklick ziehen: drehen<br>Mausrad: zoomen<br>Rechtsklick ziehen: verschieben<br>Quest: „ENTER VR“ bei HTTPS</small><div id="error"></div></div>
-<div class="bottom">GLB · PBR-Materialien · 1:1-Maßstab<br>Eigenständig erzeugte 3D-Geometrie</div><div class="status" id="status"><span class="pill">3D-Modell wird geladen …</span></div>
+<div class="bottom">GLB · überarbeitete PBR-Materialien · 1:1-Maßstab<br>Eigenständig erzeugte 3D-Geometrie</div><div class="status" id="status"><span class="pill">3D-Modell wird geladen …</span></div>
 <script type="module">
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
-const scene=new THREE.Scene();scene.background=new THREE.Color('#151f27');scene.fog=new THREE.Fog('#151f27',7,17);
-const camera=new THREE.PerspectiveCamera(53,innerWidth/innerHeight,.03,80);camera.position.set(2.1,1.65,2.4);
-const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.5;renderer.xr.enabled=true;document.body.appendChild(renderer.domElement);
-const orbit=new OrbitControls(camera,renderer.domElement);orbit.target.set(0,.53,0);orbit.enableDamping=true;orbit.minDistance=.8;orbit.maxDistance=6;orbit.maxPolarAngle=Math.PI/2.08;orbit.update();
-scene.add(new THREE.HemisphereLight(0xd9e8ff,0x33383e,2.15));
-function light(color,intensity,x,y,z,size){let l=new THREE.DirectionalLight(color,intensity);l.position.set(x,y,z);l.castShadow=true;l.shadow.mapSize.set(2048,2048);l.shadow.camera.left=-3;l.shadow.camera.right=3;l.shadow.camera.top=3;l.shadow.camera.bottom=-3;l.shadow.bias=-.0003;l.shadow.radius=size;scene.add(l)}light(0xffdfbb,3.0,-2.3,4,3,3);light(0x9bbcf5,1.25,1.7,2,-3,4);
-const floor=new THREE.Mesh(new THREE.PlaneGeometry(90,90),new THREE.MeshStandardMaterial({color:0x333b40,roughness:.92,metalness:.04}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
-const platform=new THREE.Mesh(new THREE.CylinderGeometry(1.19,1.23,.06,72),new THREE.MeshStandardMaterial({color:0x1a252b,roughness:.5,metalness:.55}));platform.position.y=-.026;platform.receiveShadow=true;scene.add(platform);
-const ring=new THREE.Mesh(new THREE.TorusGeometry(1.21,.007,8,96),new THREE.MeshStandardMaterial({color:0xe0995b,roughness:.35,metalness:.7,emissive:0x4e230c}));ring.rotation.x=Math.PI/2;ring.position.y=.007;scene.add(ring);
-const grid=new THREE.GridHelper(20,40,0x3c4851,0x303c43);grid.position.y=-.058;scene.add(grid);
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#22303d');
+scene.fog=new THREE.Fog('#22303d',9,22);
+const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.03,80);camera.position.set(2.2,1.4,2.6);
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.35;renderer.xr.enabled=true;document.body.appendChild(renderer.domElement);
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const orbit=new OrbitControls(camera,renderer.domElement);orbit.target.set(0,.56,0);orbit.enableDamping=true;orbit.minDistance=.8;orbit.maxDistance=6;orbit.maxPolarAngle=Math.PI/2.05;orbit.update();
+
+scene.add(new THREE.HemisphereLight(0xf2f7ff,0x6a7480,2.8));
+scene.add(new THREE.AmbientLight(0xffffff,0.55));
+function dir(color,intensity,x,y,z,shadowSize=1024){const l=new THREE.DirectionalLight(color,intensity);l.position.set(x,y,z);l.castShadow=true;l.shadow.mapSize.set(shadowSize,shadowSize);l.shadow.camera.left=-4;l.shadow.camera.right=4;l.shadow.camera.top=4;l.shadow.camera.bottom=-4;l.shadow.bias=-.00025;scene.add(l);return l}
+dir(0xfff1de,3.6,3.7,4.5,4.2,2048);dir(0xd6e6ff,1.8,-4,2.4,1.5,1024);dir(0xffd4ba,1.2,-1.2,3.0,-4.0,1024);
+
+const floorMat = new THREE.MeshStandardMaterial({color:0x69727c,roughness:.9,metalness:.02});
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(90,90),floorMat);floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+const platform=new THREE.Mesh(new THREE.CylinderGeometry(1.18,1.22,.06,72),new THREE.MeshStandardMaterial({color:0x313b44,roughness:.45,metalness:.78}));platform.position.y=-.026;platform.receiveShadow=true;scene.add(platform);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(1.205,.008,10,120),new THREE.MeshStandardMaterial({color:0xf0a96b,roughness:.25,metalness:.85,emissive:0x2a1206,emissiveIntensity:.4}));ring.rotation.x=Math.PI/2;ring.position.y=.007;scene.add(ring);
+const grid=new THREE.GridHelper(20,40,0x687683,0x586570);grid.position.y=-.058;grid.material.opacity=.28;grid.material.transparent=true;scene.add(grid);
+
 let model,drawers=[];const drawerButtons=document.getElementById('drawers');const desired=Array(6).fill(false), positions=Array(6).fill(0);
 function toggle(i){desired[i]=!desired[i];updateUi()}
 for(let i=0;i<6;i++){const b=document.createElement('button');b.textContent=`Fach ${i+1}`;b.onclick=()=>toggle(i);drawerButtons.appendChild(b)}
 function updateUi(){[...drawerButtons.children].forEach((b,i)=>b.classList.toggle('active',desired[i]));document.getElementById('toggleAll').textContent=desired.every(Boolean)?'Alle schließen':'Alle öffnen'}
 document.getElementById('toggleAll').onclick=()=>{const v=!desired.every(Boolean);for(let i=0;i<6;i++)desired[i]=v;updateUi()};
-const colors={shell:0x293740,frame:0x151c21,drawer:0x344853,drawer_front:0x33434e,chrome:0xb8cbd2,chrome_dark:0x778b96,black:0x101619,rubber:0x17191b,rubber_groove:0x2b3133,red:0xe04431};
-function finishMesh(o){if(!o.isMesh)return;const n=o.name;let col=colors.shell,metalness=.75,roughness=.38;if(/Caster_tire|Rubber|bumper/i.test(n)){col=colors.rubber;metalness=.03;roughness=.91}else if(/rib|groove/i.test(n)){col=colors.rubber_groove;metalness=.02;roughness=.87}else if(/Handle_grab|Top_aluminum|Lock_cylinder|Caster_axle|Corner_fastener/i.test(n)){col=colors.chrome;metalness=.92;roughness=.2}else if(/chrome|Hub|rail|mount|Caster_swivel|Caster_fork|Side_handle/i.test(n)){col=colors.chrome_dark;metalness=.88;roughness=.32}else if(/Drawer_front/i.test(n)){col=colors.drawer_front;metalness=.64;roughness=.33}else if(/Drawer_/i.test(n)){col=colors.drawer;metalness=.61;roughness=.4}else if(/Corner|Frame|Base|reinforcement|lip/i.test(n)){col=colors.frame;metalness=.79;roughness=.41}else if(/label_recess|Badge_back/i.test(n)){col=colors.black;metalness=.2;roughness=.75}else if(/badge_colored/i.test(n)){col=colors.red;metalness=.3;roughness=.3};o.material=new THREE.MeshStandardMaterial({color:col,metalness,roughness});o.castShadow=true;o.receiveShadow=true;}
-new GLTFLoader().load('./assets/werkzeugwagen.glb',g=>{model=g.scene;model.traverse(finishMesh);scene.add(model);drawers=Array.from({length:6},(_,i)=>model.getObjectByName(`Drawer_${i+1}`));console.log('Drawer nodes',drawers.map(d=>!!d));document.getElementById('status').innerHTML='<span class="pill">✓ Echtes GLB geladen</span>'},null,e=>{document.getElementById('error').innerHTML='<p class="error">GLB konnte nicht geladen werden. Bitte den gesamten Ordner inklusive assets/ hochladen. '+String(e.message||e)+'</p>';document.getElementById('status').textContent='Ladefehler'});
+
+const colors={shell:0xd13b32,frame:0x293038,drawer:0xc83b33,drawer_front:0xd8453a,chrome:0xdce6eb,chrome_dark:0x96a8b4,black:0x23282d,rubber:0x25282c,rubber_groove:0x34393d,red:0xf15b49};
+function finishMesh(o){
+  if(!o.isMesh)return;
+  const n=o.name;
+  let col=colors.shell,metalness=.35,roughness=.42,emissive=0x000000, emissiveIntensity=0;
+  if(/Caster_tire|Rubber|bumper/i.test(n)){col=colors.rubber;metalness=.02;roughness=.96}
+  else if(/rib|groove/i.test(n)){col=colors.rubber_groove;metalness=.02;roughness=.9}
+  else if(/Handle_grab|Top_aluminum|Lock_cylinder|Caster_axle|Corner_fastener/i.test(n)){col=colors.chrome;metalness=.95;roughness=.16}
+  else if(/chrome|Hub|rail|mount|Caster_swivel|Caster_fork|Side_handle/i.test(n)){col=colors.chrome_dark;metalness=.84;roughness=.28}
+  else if(/Drawer_front/i.test(n)){col=colors.drawer_front;metalness=.26;roughness=.38}
+  else if(/Drawer_/i.test(n)){col=colors.drawer;metalness=.22;roughness=.44}
+  else if(/Corner|Frame|Base|reinforcement|lip/i.test(n)){col=colors.frame;metalness=.58;roughness=.42}
+  else if(/label_recess|Badge_back/i.test(n)){col=colors.black;metalness=.08;roughness=.72}
+  else if(/badge_colored/i.test(n)){col=colors.red;metalness=.18;roughness=.28;emissive=0x2b0805;emissiveIntensity=.18}
+  const m = new THREE.MeshStandardMaterial({color:col,metalness,roughness,envMapIntensity:1.15,emissive,emissiveIntensity});
+  o.material=m;o.castShadow=true;o.receiveShadow=true;
+}
+
+new GLTFLoader().load('./assets/werkzeugwagen.glb',g=>{
+  model=g.scene;
+  model.traverse(finishMesh);
+  model.rotation.y=-0.35;
+  scene.add(model);
+  drawers=Array.from({length:6},(_,i)=>model.getObjectByName(`Drawer_${i+1}`));
+  document.getElementById('status').innerHTML='<span class="pill">✓ Echtes GLB geladen</span>';
+},null,e=>{
+  document.getElementById('error').innerHTML='<p class="error">GLB konnte nicht geladen werden. Bitte den gesamten Ordner inklusive assets/ hochladen. '+String(e.message||e)+'</p>';
+  document.getElementById('status').textContent='Ladefehler';
+});
+
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();let down;
 renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY}});
-renderer.domElement.addEventListener('pointerup',e=>{if(!model||!down||Math.hypot(e.clientX-down.x,e.clientY-down.y)>7)return;pointer.set(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObject(model,true);if(hits.length){let o=hits[0].object;while(o&&o!==model){let m=o.name.match(/^Drawer_(\d+)$/);if(m){toggle(Number(m[1])-1);break}o=o.parent}}});
-let last=performance.now();renderer.setAnimationLoop(()=>{let now=performance.now(),dt=Math.min(.05,(now-last)/1000);last=now;drawers.forEach((d,i)=>{if(!d)return;positions[i]=THREE.MathUtils.damp(positions[i],desired[i]?.39:0,9,dt);d.position.z=positions[i]});if(!renderer.xr.isPresenting)orbit.update();renderer.render(scene,camera)});
+renderer.domElement.addEventListener('pointerup',e=>{
+  if(!model||!down||Math.hypot(e.clientX-down.x,e.clientY-down.y)>7)return;
+  pointer.set(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);raycaster.setFromCamera(pointer,camera);
+  const hits=raycaster.intersectObject(model,true);
+  if(hits.length){let o=hits[0].object;while(o&&o!==model){let m=o.name.match(/^Drawer_(\d+)$/);if(m){toggle(Number(m[1])-1);break}o=o.parent}}
+});
+
+let last=performance.now();
+renderer.setAnimationLoop(()=>{
+  let now=performance.now(),dt=Math.min(.05,(now-last)/1000);last=now;
+  drawers.forEach((d,i)=>{if(!d)return;positions[i]=THREE.MathUtils.damp(positions[i],desired[i]?.39:0,9,dt);d.position.z=positions[i]});
+  if(!renderer.xr.isPresenting)orbit.update();
+  renderer.render(scene,camera)
+});
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
-// VR mode is optional for asset inspection; controllers can ray-select drawer handles.
 const vrHost=document.getElementById('vr');if(navigator.xr&&location.protocol==='https:'){const vrButton=VRButton.createButton(renderer);vrButton.style.cssText='position:static;display:block;transform:none;width:100%;height:36px;margin-top:10px;border-radius:10px;background:#203743;color:white;border:1px solid #48606f;cursor:pointer';vrHost.appendChild(vrButton);}else{vrHost.innerHTML='<small>VR-Modus benötigt einen WebXR-Browser und HTTPS.</small>'}
 for(let i=0;i<2;i++){const controller=renderer.xr.getController(i);scene.add(controller);controller.addEventListener('selectstart',()=>{if(!model)return;const rot=new THREE.Matrix4().extractRotation(controller.matrixWorld);raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld);raycaster.ray.direction.set(0,0,-1).applyMatrix4(rot);const hits=raycaster.intersectObject(model,true);if(hits.length){let o=hits[0].object;while(o&&o!==model){const m=o.name.match(/^Drawer_(\d+)$/);if(m){toggle(+m[1]-1);break}o=o.parent}}});}
 </script></body></html>
