@@ -244,12 +244,21 @@ loader.load('https://threejs.org/examples/models/gltf/ferrari.glb',g=>{
  for(const name of names){
    const w=o.getObjectByName(name);
    if(!w){console.warn('Radknoten fehlt',name);continue}
-   // Weltposition der originalen Reifen als geometrische Referenz.
-   const pos=w.getWorldPosition(new THREE.Vector3());
    const center=new THREE.Box3().setFromObject(w).getCenter(new THREE.Vector3());
    wheelAnchors.push({name,position:center});
-   w.visible=false; // Keine doppelten vorhandenen Räder.
+   w.visible=false;
  }
+ // Die Ferrari-Demo kann zusätzliche sichtbare Radmeshes getrennt von den
+ // 4 Rad-Gruppen besitzen. Nur identifizierte Reifen-/Felgen-Meshes verstecken.
+ let hiddenWheelParts=0;
+ o.traverse(n=>{
+   if(!n.isMesh) return;
+   const nm=(n.name||'').toLowerCase();
+   if(/(wheel|tire|tyre|rim|felge|reifen|brake_disc)/.test(nm)){
+     n.visible=false;hiddenWheelParts++;
+   }
+ });
+ console.info('Radgruppen erkannt:',wheelAnchors.length,'weitere Radmeshes:',hiddenWheelParts);
  carStatus=wheelAnchors.length===4?'geladen':'teilweise geladen';
  resolveVehicle(wheelAnchors);
 },undefined,e=>{carStatus='nicht verfügbar';resolveVehicle([]);notice('Fahrzeug konnte nicht geladen werden');console.warn(e)});
@@ -269,14 +278,15 @@ for(const x of [-.47,.47])box(.12,1.45,.12,dark,x,.74,0,rackRoot);
 for(const y of [.12,.74,1.36])box(1.06,.07,.27,steel,0,y,0,rackRoot);
 const rackSlots=[[-2.88,.54,2.65],[-2.05,.54,2.65],[-2.88,1.07,2.65],[-2.05,1.07,2.65]];
 Promise.all([carReady,new Promise(resolve=>new GLTFLoader().load('./assets/reifen.glb',g=>resolve(g.scene),undefined,()=>resolve(null)))]).then(([anchors,tireModel])=>{
- if(!tireModel||anchors.length!==4){notice('Reifen-/Fahrzeugmodelle fehlen; Radwechsel nicht bereit');return}
+ if(!tireModel){notice('Reifenmodell konnte nicht geladen werden');return}
+ if(anchors.length!==4)notice('Radpositionen teilweise nur angenähert; Reifen am Ständer trotzdem geladen');
  const bb=new THREE.Box3().setFromObject(tireModel),size=bb.getSize(new THREE.Vector3());
  const center=bb.getCenter(new THREE.Vector3());tireModel.position.sub(center);
  // TRELLIS-Reifenachse ist X; Radius aus Y/Z. Physikalischer Reifendurchmesser etwa 0,65 m.
  const scale=.65/Math.max(size.y,size.z);
  const wheelBase=new THREE.Group();wheelBase.add(tireModel);wheelBase.scale.setScalar(scale);
  for(let i=0;i<4;i++){
-   const wheelInfo=anchors[i],side=Math.sign(wheelInfo.position.x-carAnchor.position.x)||1;
+   const wheelInfo=anchors[i]||{name:'wheel_'+i,position:new THREE.Vector3(carAnchor.position.x+(i%2?1:-1)*.88,.7,carAnchor.position.z+(i<2?1:-1)*1.25)},side=Math.sign(wheelInfo.position.x-carAnchor.position.x)||1;
    const holder=new THREE.Group();holder.position.copy(wheelInfo.position);scene.add(holder);
    const hub=add(new THREE.CylinderGeometry(.12,.12,.04,24),steel,0,0,0,holder);hub.rotation.z=Math.PI/2;
    const ring=add(new THREE.TorusGeometry(.27,.011,8,40),new THREE.MeshBasicMaterial({color:'#5be2ae'}),side*.10,0,0,holder);ring.rotation.y=Math.PI/2;ring.visible=false;
@@ -341,9 +351,14 @@ function take(o,parent,index){
  if(!o||o.userData.heldBy!=null)return false;
  if(o.userData.kind==='tire'&&o.userData.mountIndex!=null){const w=wheelTasks[o.userData.mountIndex];if(w){w.mounted=false;w.done=false;w.progress=0;}}
  o.userData.heldBy=index;
- // Parent.attach erhält bei der Aufnahme die tatsächliche Weltposition UND Rotation.
- // Kein hartkodiertes Schwert-Pose-Override mehr.
  parent.attach(o);
+ if(o===driver){
+   // Griffmitte statt Akku: Modell (24 cm hoch) hat sein unteres Ende beim Akku.
+   // Die Hand soll etwa 10 cm oberhalb des Akkus liegen, mit Werkzeugachse nach vorn.
+   // Kontinuierliche Pose während des Haltens statt Position zum Aufnahmezeitpunkt.
+   o.quaternion.setFromEuler(new THREE.Euler(-Math.PI/2,0,0));
+   o.position.set(.018,-.075,-.13);
+ }
  pickCount++;refresh();notice('Gegriffen: '+o.userData.name);return true;
 }
 function release(o){
